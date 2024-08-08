@@ -1,0 +1,53 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Icon Test</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+</head>
+<nav class="sidebar">
+  <div class="pro-sidebar-logo">
+    <div class="user-initials">{{ userInitials }}</div>
+    <h5 class="user-fullname">
+      {{ userProfile?.nom }} {{ userProfile?.prenom }}
+    </h5>
+  </div>
+  <div class="sidebar-content">
+    <ul>
+      <li class="menu-item">
+        <a routerLink="/main/collaborateurs">
+          <span class="menu-icon">
+            <i class="ri-team-fill"></i>
+          </span>
+          <span class="menu-title">Collaborateurs</span>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a routerLink="/main/medecins">
+          <span class="menu-icon">
+            <i class="ri-stethoscope-fill"></i>
+          </span>
+          <span class="menu-title">Médecins</span>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a routerLink="/main/comptesArchivés">
+          <span class="menu-icon">
+            <i class="ri-user-star-fill"></i>
+          </span>
+          <span class="menu-title">comptes archivés</span>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a (click)="logout()">
+          <span class="menu-icon">
+            <i class="ri-logout-box-fill"></i>
+          </span>
+          <span class="menu-title">Se déconnecter</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,56 @@
+<!-- modifier-collaborateur.component.html -->
+<h2 class="title">Modifier Collaborateur</h2>
+<form (ngSubmit)="onSubmit()" class="mainContent">
+  <div>
+    <label for="nom">Nom:</label>
+    <input id="nom" [(ngModel)]="user.nom" name="nom" required readonly />
+  </div>
+  <div>
+    <label for="prenom">Prénom:</label>
+    <input
+      id="prenom"
+      [(ngModel)]="user.prenom"
+      name="prenom"
+      required
+      readonly
+    />
+  </div>
+  <div>
+    <label for="username">Email:</label>
+    <input
+      id="username"
+      [(ngModel)]="user.username"
+      name="username"
+      required
+      readonly
+    />
+  </div>
+  <div>
+    <label for="dateNaissance">Date de naissance:</label>
+    <input
+      id="dateNaissance"
+      type="date"
+      [(ngModel)]="user.dateNaissance"
+      name="dateNaissance"
+      required
+      readonly
+    />
+  </div>
+  <div>
+    <label for="role">Rôle:</label>
+    <select id="role" [(ngModel)]="user.role" name="role" required>
+      <option value="COLLABORATEUR">Collaborateur</option>
+      <option value="CHARGE_RH">Chargé RH</option>
+    </select>
+  </div>
+  <div>
+    <label for="departement">Département:</label>
+    <input
+      id="departement"
+      [(ngModel)]="user.departement"
+      name="departement"
+      required
+    />
+  </div>
+  <button type="submit">Enregistrer les modifications</button>
+</form>

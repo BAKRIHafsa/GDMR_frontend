@@ -1,0 +1,41 @@
+<div class="title">
+  <h1>Les listes des médecins</h1>
+</div>
+<div class="medecins-list-container">
+  <div *ngFor="let status of statuses">
+    <div class="status">
+      <h2>{{ status }}</h2>
+    </div>
+    <div
+      *ngIf="(usersByStatus.get(status) || []).length === 0"
+      class="no-records-message"
+    >
+      <p>Aucun médecin {{ status.toLowerCase() }} trouvé.</p>
+    </div>
+    <table *ngIf="(usersByStatus.get(status) || []).length > 0">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Date de naissance</th>
+          <th>Rôle</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of usersByStatus.get(status)">
+          <td>{{ user.nom }}</td>
+          <td>{{ user.prenom }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.dateNaissance | date }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+<!--             <button (click)="modifierMedecin(user.idUser)">Modifier</button>
+ -->            <button (click)="archiverMedecin(user.idUser)">Archiver</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

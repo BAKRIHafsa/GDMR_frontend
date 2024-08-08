@@ -1,0 +1,49 @@
+<div class="title">
+  <h1>Les listes des collaborateurs de SQLI</h1>
+</div>
+<div class="collaborateurs-list-container">
+  <div *ngFor="let status of statuses">
+    <div class="status">
+      <h2>{{ status }}</h2>
+    </div>
+    <div
+      *ngIf="(usersByStatus.get(status) || []).length === 0"
+      class="no-records-message"
+    >
+      <p>Aucun collaborateurs {{ status.toLowerCase() }} trouvé.</p>
+    </div>
+    <table *ngIf="(usersByStatus.get(status) || []).length > 0">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Date de naissance</th>
+          <!--  <th>Poste</th>
+          <th>Département</th> -->
+          <th>Rôle</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of usersByStatus.get(status)">
+          <td>{{ user.nom }}</td>
+          <td>{{ user.prenom }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.dateNaissance | date }}</td>
+          <!--  <td>{{ user.poste }}</td>
+          <td>{{ user.departement }}</td> -->
+          <td>{{ user.role }}</td>
+          <td>
+            <button (click)="modifierCollaborateur(user.idUser)">
+              Modifier
+            </button>
+            <button (click)="archiverCollaborateur(user.idUser)">
+              Archiver
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<!-- <div class="title">
+  <h1>Les comptes archivés</h1>
+</div>
+<div class="archive-list-container">
+  <div
+    *ngIf="(allArchivedUsers$ | async)?.length === 0"
+    class="no-records-message"
+  >
+    <p>Aucun compte archivé trouvé.</p>
+  </div>
+  <table *ngIf="(allArchivedUsers$ | async)?.length > 0">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Date de naissance</th>
+        <th>Rôle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of allArchivedUsers$ | async">
+        <td>{{ user.nom }}</td>
+        <td>{{ user.prenom }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.dateNaissance | date }}</td>
+        <td>{{ user.role }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+ -->
+ <div class="title">
+  <h1>Les comptes archivés</h1>
+</div>
+<div class="archive-list-container">
+  <table *ngIf="allArchivedUsers$ | async as allArchivedUsers">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Date de naissance</th>
+        <!--  <th>Poste</th>
+      <th>Département</th> -->
+        <th>Rôle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of allArchivedUsers">
+        <td>{{ user.nom }}</td>
+        <td>{{ user.prenom }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.dateNaissance | date }}</td>
+        <!--  <td>{{ user.poste }}</td>
+      <td>{{ user.departement }}</td> -->
+        <td>{{ user.role }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,68 @@
+/* Conteneur principal du formulaire */
+form {
+  max-width: 600px; /* Largeur maximale du formulaire */
+  margin: 0 auto; /* Centrer le formulaire */
+  padding: 20px;
+  background: #f9f9f9; /* Fond légèrement gris */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Style des champs de saisie */
+div {
+  margin-bottom: 15px;
+}
+
+/* Labels pour les champs de saisie */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Champs de saisie */
+input[type="text"],
+input[type="date"],
+select {
+  width: 100%; /* Occupe toute la largeur disponible */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[readonly] {
+  background-color: #e9ecef; /* Gris clair pour les champs read-only */
+  cursor: not-allowed; /* Curseur pour indiquer que le champ est non modifiable */
+  color: #6c757d; /* Texte gris pour les champs read-only */
+}
+
+/* Style du bouton */
+button {
+  padding: 10px 20px;
+  background-color: #3498db; /* Couleur principale */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9; /* Couleur plus sombre au survol */
+}
+
+.title {
+  text-align: center; /* Centre le titre */
+  margin-bottom: 20px; /* Espace sous le titre */
+}
+
+.snack-bar-success {
+  background-color: #4caf50; /* Green background for success */
+  color: white; /* White text color */
+}
+
+.snack-bar-error {
+  background-color: #f44336; /* Red background for error */
+  color: white; /* White text color */
+}
