@@ -1,0 +1,74 @@
+/* Conteneur principal pour les détails du médecin */
+.medecin-details-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre des détails du médecin */
+.medecin-details-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Section des détails du médecin */
+.medecin-details-container p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #666;
+}
+
+.medecin-details-container strong {
+  color: #333;
+}
+
+/* Style pour le calendrier */
+.calendar-container {
+  width: calc(100% - 280px); /* Ajusté pour correspondre à la marge gauche */
+  margin-left: 280px;
+  overflow-x: auto;
+  padding-right: 20px; /* Ajoute un peu d'espace à droite */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+::ng-deep .fc {
+  width: 100%; /* Le calendrier occupe toute la largeur de son conteneur */
+  min-width: 600px; /* Empêche le calendrier de devenir trop étroit */
+}
+
+@media (max-width: 1200px) {
+  .calendar-container {
+    width: calc(100% - 20px);
+    margin-left: 20px;
+  }
+}
+
+/* Style spécifique pour FullCalendar */
+.full-calendar {
+  width: 100%;
+  height: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .medecin-details-container {
+    padding: 15px;
+  }
+
+  .medecin-details-container h2 {
+    font-size: 20px;
+  }
+
+  .medecin-details-container p {
+    font-size: 14px;
+  }
+
+  .calendar-container {
+    margin-left: 10px;
+    padding-right: 10px;
+  }
+}

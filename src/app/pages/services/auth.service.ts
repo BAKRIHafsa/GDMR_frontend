@@ -1,16 +1,24 @@
-// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators'; // Assurez-vous d'importer `tap`
+import { Observable, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+import { User } from '../models/user.model';
 
 interface LoginResponse {
   access_token: string;
 }
 
-interface UserProfile {
+export interface UserProfile {
   nom: string;
   prenom: string;
+  username: string;
+  dateNaissance: string;
+  role: string;
+}
+
+export interface ChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
 }
 
 @Injectable({
@@ -18,6 +26,7 @@ interface UserProfile {
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api';
+  private currentRole: string | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -43,15 +52,53 @@ export class AuthService {
 
   logout(): void {
     sessionStorage.removeItem('access_token');
+    this.currentRole = null;
   }
 
-  getUserProfile(): Observable<UserProfile> {
-    const token = this.getToken();
-    if (!token) {
-      throw new Error('No token found');
-    }
-    return this.http.get<UserProfile>(`${this.apiUrl}/user/profile`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  getUserProfile(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/user/profile`).pipe(
+      catchError((error) => {
+        console.error('Error fetching user profile:', error);
+        return throwError(() => new Error('Error fetching user profile'));
+      })
+    );
+  }
+
+  getCurrentUserRole(): Observable<{ role: string }> {
+    return this.http.get<{ role: string }>(`${this.apiUrl}/user/role`).pipe(
+      tap((response) => (this.currentRole = response.role)),
+      catchError((error) => {
+        console.error('Error fetching user role:', error);
+        return throwError(() => new Error('Error fetching user role'));
+      })
+    );
+  }
+
+  getRole(): string | null {
+    return this.currentRole;
+  }
+
+  changePassword(request: ChangePasswordRequest): Observable<string> {
+    return this.http
+      .post(`${this.apiUrl}/user/change-password`, request, {
+        responseType: 'text',
+      })
+      .pipe(
+        tap((response) => {
+          console.log('Password changed successfully');
+        }),
+        catchError((error) => {
+          console.error('Error changing password:', error);
+          return throwError(() => new Error('Error changing password'));
+        })
+      );
+  }
+
+  getCollaborateurs(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/user/all-collab`);
+  }
+
+  createUser(user: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/admin/create`, user);
   }
 }

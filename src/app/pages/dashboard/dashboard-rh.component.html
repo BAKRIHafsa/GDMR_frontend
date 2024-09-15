@@ -1,0 +1,91 @@
+<div class="main-container">
+  <div class="sidebar"></div>
+  <div class="content">
+    <div class="dashboard">
+      <h1 class="title">Dashboard</h1>
+    <div *ngIf="userProfile?.role === 'CHARGE_RH'">
+        <div class="stats-container">
+          <div class="stat-box">
+            <h3 class="number">Visites Planifiées pour Aujourd'hui</h3>
+            <p class="stat-number">{{ plannedVisits }}</p>
+          </div>
+          <div class="stat-box">
+            <h3 class="number">Nombre de Visites Terminées cette Semaine</h3>
+            <p class="stat-number">{{ completedVisitsThisWeek }}</p>
+          </div>
+        </div>
+
+        <div class="visits-table">
+          <h3 class="détails">Détails de Toutes les Visites</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>Collaborateur</th>
+                <th>Médecin</th>
+                <th>Type</th>
+                <th>Status de Visite</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let visit of allVisits">
+                <td>{{ visit.date }}</td>
+                <td>
+                  {{ visit.heureDebutVisite }} à {{ visit.heureFinVisite }}
+                </td>
+                <td>{{ visit.nomCollaborateur }}</td>
+                <td>{{ visit.nomMedecin }}</td>
+                <td>{{ visit.typeVisite }}</td>
+                <td>{{ visit.statusVisite }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="details2">
+        <div class="stats-container">
+          <div class="stat-box">
+            <h3 class="number">
+              Visites Planifiées pour Aujourd'hui pour vous
+            </h3>
+            <p class="stat-number">{{ plannedVisitsCollab }}</p>
+          </div>
+          <div class="stat-box">
+            <h3 class="number">
+              Nombre de Visites Terminées cette Semaine pour vous
+            </h3>
+            <p class="stat-number">{{ completedVisitsThisWeekCollab }}</p>
+          </div>
+        </div>
+        <div class="visits-table">
+          <h3 class="détails">Détails de Toutes les Visites</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>Collaborateur</th>
+                <th>Médecin</th>
+                <th>Type</th>
+                <th>Status de Visite</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let visit of allVisitsCollab">
+                <td>{{ visit.date }}</td>
+                <td>
+                  {{ visit.heureDebutVisite }} à {{ visit.heureFinVisite }}
+                </td>
+                <td>{{ visit.nomCollaborateur }}</td>
+                <td>{{ visit.nomMedecin }}</td>
+                <td>{{ visit.typeVisite }}</td>
+                <td>{{ visit.statusVisite }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

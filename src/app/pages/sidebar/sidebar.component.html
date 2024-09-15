@@ -9,38 +9,152 @@
 </head>
 <nav class="sidebar">
   <div class="pro-sidebar-logo">
-    <div class="user-initials">{{ userInitials }}</div>
+    <a
+      [routerLink]="['/main/profile']"
+      class="user-initials"
+      routerLinkActive="active"
+      >{{ userInitials }}</a
+    >
     <h5 class="user-fullname">
       {{ userProfile?.nom }} {{ userProfile?.prenom }}
     </h5>
   </div>
   <div class="sidebar-content">
     <ul>
-      <li class="menu-item">
-        <a routerLink="/main/collaborateurs">
+      <!-- Admin Sidebar Items -->
+      <li *ngIf="userProfile?.role === 'ADMINISTRATEUR'" class="menu-item">
+        <a routerLink="/main/admin-dashboard" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-team-fill"></i>
+          </span>
+          <span class="menu-title">Dashboard</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'ADMINISTRATEUR'" class="menu-item">
+        <a routerLink="/main/collaborateurs" routerLinkActive="active">
           <span class="menu-icon">
             <i class="ri-team-fill"></i>
           </span>
           <span class="menu-title">Collaborateurs</span>
         </a>
       </li>
-      <li class="menu-item">
-        <a routerLink="/main/medecins">
+      <li *ngIf="userProfile?.role === 'ADMINISTRATEUR'" class="menu-item">
+        <a routerLink="/main/medecins" routerLinkActive="active">
           <span class="menu-icon">
             <i class="ri-stethoscope-fill"></i>
           </span>
           <span class="menu-title">Médecins</span>
         </a>
       </li>
-      <li class="menu-item">
-        <a routerLink="/main/comptesArchivés">
+      <li *ngIf="userProfile?.role === 'ADMINISTRATEUR'" class="menu-item">
+        <a routerLink="/main/comptesArchivés" routerLinkActive="active">
           <span class="menu-icon">
             <i class="ri-user-star-fill"></i>
           </span>
-          <span class="menu-title">comptes archivés</span>
+          <span class="menu-title">Comptes archivés</span>
         </a>
       </li>
-      <li class="menu-item">
+      <li *ngIf="userProfile?.role === 'ADMINISTRATEUR'" class="menu-item">
+        <a (click)="logout()">
+          <span class="menu-icon">
+            <i class="ri-logout-box-fill"></i>
+          </span>
+          <span class="menu-title">Se déconnecter</span>
+        </a>
+      </li>
+
+      <!-- ChargeRH Sidebar Items -->
+      <li *ngIf="userProfile?.role === 'CHARGE_RH'" class="menu-item">
+        <a routerLink="/main/rh-dashboard" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-dashboard-fill"></i>
+          </span>
+          <span class="menu-title">Dashboard</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'CHARGE_RH'" class="menu-item">
+        <a routerLink="/main/Acollaborateurs" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-team-fill"></i>
+          </span>
+          <span class="menu-title">Liste des Collaborateurs</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'CHARGE_RH'" class="menu-item">
+        <a routerLink="/main/Amedecins" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-stethoscope-fill"></i>
+          </span>
+          <span class="menu-title">Liste des Médecins</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'CHARGE_RH'" class="menu-item">
+        <a routerLink="/main/calendrier-rh" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-calendar-fill"></i>
+          </span>
+          <span class="menu-title">Calendrier des disponibilités</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'CHARGE_RH'" class="menu-item">
+        <a routerLink="/main/calendrier-rh-visite" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-calendar-fill"></i>
+          </span>
+          <span class="menu-title">Calendrier des visites</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'CHARGE_RH'" class="menu-item">
+        <a (click)="logout()">
+          <span class="menu-icon">
+            <i class="ri-logout-box-fill"></i>
+          </span>
+          <span class="menu-title">Se déconnecter</span>
+        </a>
+      </li>
+      <!-- Med Sidebar Items -->
+      <li *ngIf="userProfile?.role === 'MEDECIN'" class="menu-item">
+        <a routerLink="/main/med-dashboard" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-team-fill"></i>
+          </span>
+          <span class="menu-title">Dashboard</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'MEDECIN'" class="menu-item">
+        <a routerLink="/main/calendrier-med" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-calendar-fill"></i>
+          </span>
+          <span class="menu-title">Calendrier</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'MEDECIN'" class="menu-item">
+        <a (click)="logout()">
+          <span class="menu-icon">
+            <i class="ri-logout-box-fill"></i>
+          </span>
+          <span class="menu-title">Se déconnecter</span>
+        </a>
+      </li>
+      <!-- Collab Sidebar Items -->
+      <li *ngIf="userProfile?.role === 'COLLABORATEUR'" class="menu-item">
+        <a routerLink="/main/collab-dashboard" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-team-fill"></i>
+          </span>
+          <span class="menu-title">Dashboard</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'COLLABORATEUR'" class="menu-item">
+        <a routerLink="/main/calendrier-collab" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-calendar-fill"></i>
+          </span>
+          <span class="menu-title">Calendrier</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'COLLABORATEUR'" class="menu-item">
         <a (click)="logout()">
           <span class="menu-icon">
             <i class="ri-logout-box-fill"></i>

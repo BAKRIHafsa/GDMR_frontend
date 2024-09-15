@@ -32,6 +32,11 @@
   justify-content: center;
   font-size: 28px; /* Increased font size */
   font-weight: bold;
+  text-decoration: none; /* Remove underline */
+}
+.user-initials:hover {
+  background-color: #2980b9; /* Couleur de survol vive */
+  cursor: pointer; /* Change le curseur pour indiquer que l'élément est cliquable */
 }
 
 .user-fullname {
@@ -105,4 +110,13 @@ ul {
 
 .menu-item:last-child a:hover {
   background-color: #c0392b;
+}
+
+.menu-item a.active {
+  background-color: #1abc9c;
+  color: #ffffff;
+}
+
+.menu-item a.active .menu-icon i {
+  color: #ffffff;
 }

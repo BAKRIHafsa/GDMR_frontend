@@ -31,8 +31,15 @@
           <td>{{ user.dateNaissance | date }}</td>
           <td>{{ user.role }}</td>
           <td>
-<!--             <button (click)="modifierMedecin(user.idUser)">Modifier</button>
- -->            <button (click)="archiverMedecin(user.idUser)">Archiver</button>
+            <!--             <button (click)="modifierMedecin(user.idUser)">Modifier</button>
+ -->
+            <button
+              *ngIf="status === 'created'"
+              (click)="creerMedecin(user.idUser)"
+            >
+              Créer
+            </button>
+            <button (click)="archiverMedecin(user.idUser)">Archiver</button>
           </td>
         </tr>
       </tbody>

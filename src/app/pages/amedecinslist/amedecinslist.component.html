@@ -1,0 +1,35 @@
+<div class="title">
+  <h1>Les listes des médecins de SQLI</h1>
+</div>
+<div class="medecins-list-container">
+  <table *ngIf="activeMedecins.length > 0">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Date de naissance</th>
+        <!--  <th>Poste</th>
+        <th>Département</th> -->
+        <th>Rôle</th>
+        <th>Détails</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of activeMedecins">
+        <td>{{ user.nom }}</td>
+        <td>{{ user.prenom }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.dateNaissance | date }}</td>
+        <!--  <td>{{ user.poste }}</td>
+        <td>{{ user.departement }}</td> -->
+        <td>{{ user.role }}</td>
+        <td>
+          <a [routerLink]="['/main/medecin-details', user.idUser]"
+            >Voir les détails</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

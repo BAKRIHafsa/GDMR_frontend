@@ -1,0 +1,45 @@
+<h3>Créer un Créneau</h3>
+<form>
+  <label>Date:</label>
+  <input type="date" [value]="data.date" disabled />
+
+  <label>Heure de Début du Créneau:</label>
+  <input
+    type="time"
+    [(ngModel)]="data.heureDebutCreneau"
+    name="heureDebut"
+    required
+  />
+
+  <label>Heure de Fin du Créneau:</label>
+  <input
+    type="time"
+    [(ngModel)]="data.heureFinCreneau"
+    name="heureFin"
+    required
+  />
+
+  <label>Type de Visite:</label>
+  <select [(ngModel)]="data.typeVisite" name="typeVisite" required>
+    <option *ngFor="let option of typeVisiteOptions" [value]="option">
+      {{ option }}
+    </option>
+  </select>
+
+  <label>Collaborateurs Concernés:</label>
+  <select
+    multiple
+    [(ngModel)]="data.collaborateursIds"
+    name="collaborateursIds"
+  >
+    <option
+      *ngFor="let collaborateur of collaborateurs"
+      [value]="collaborateur.idUser"
+    >
+      {{ collaborateur.nom }} {{ collaborateur.prenom }}
+    </option>
+  </select>
+
+  <button type="button" (click)="onSave()">Créer le Créneau</button>
+  <button type="button" (click)="onNoClick()">Annuler</button>
+</form>

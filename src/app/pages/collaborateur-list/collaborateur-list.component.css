@@ -40,6 +40,9 @@
   margin-top: 10px; /* Espace au-dessus du message */
   text-align: center; /* Centre le texte */
 }
+tbody tr {
+  height: 60px; /* Adjust the height as needed */
+}
 
 /* Table styling */
 table {

@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>Détails de la Visite</h2>
+<div mat-dialog-content>
+  <p *ngIf="data.date"><strong>Date :</strong> {{ data.date }}</p>
+  <p *ngIf="data.heureDebutVisite">
+    <strong>Heure de Début :</strong> {{ data.heureDebutVisite }}
+  </p>
+  <p *ngIf="data.heureFinVisite">
+    <strong>Heure de Fin :</strong> {{ data.heureFinVisite }}
+  </p>
+  <p *ngIf="data.chargeRh">
+    <strong>Chargé RH :</strong> {{ data.chargeRh.nom }}
+    {{ data.chargeRh.prenom }}
+  </p>
+  <p *ngIf="data.medecin">
+    <strong>Médecin :</strong> {{ data.medecin.nom }} {{ data.medecin.prenom }}
+  </p>
+  <p *ngIf="data.medecin?.siteTravail">
+    <strong>Site de Travail :</strong> {{ data.medecin.siteTravail }}
+  </p>
+  <p *ngIf="data.medecin?.specialite">
+    <strong>Spécialité :</strong> {{ data.medecin.specialite }}
+  </p>
+  <p *ngIf="data.medecin?.qualification">
+    <strong>Qualification :</strong> {{ data.medecin.qualification }}
+  </p>
+  <p *ngIf="data.medecin?.experience">
+    <strong>Expérience :</strong> {{ data.medecin.experience }}
+  </p>
+  <p *ngIf="data.typeVisite">
+    <strong>Type de Visite :</strong> {{ data.typeVisite }}
+  </p>
+  <p *ngIf="data.statusVisite">
+    <strong>Status de la Visite :</strong> {{ data.statusVisite }}
+  </p>
+  <p *ngIf="data.justifNonValide">
+    <strong>Justification Non Validée :</strong> {{ data.justifNonValide }}
+  </p>
+  <p *ngIf="data.justifAnnuleMedecin">
+    <strong>Justification Annulation par Médecin :</strong>
+    {{ data.justifAnnuleMedecin }}
+  </p>
+  <p *ngIf="data.justifAnnuleCollaborateur">
+    <strong>Justification Annulation par Collaborateur :</strong>
+    {{ data.justifAnnuleCollaborateur }}
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Fermer</button>
+</div>

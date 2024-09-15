@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CollaborateurService } from '../services/collaborateur.service';
 import { User } from '../models/user.model';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateUserPopupComponent } from '../create-user-popup/create-user-popup.component';
 
 @Component({
   selector: 'app-collaborateurs-list',
@@ -14,7 +16,8 @@ export class CollaborateurListComponent implements OnInit {
 
   constructor(
     private collaborateurService: CollaborateurService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -72,6 +75,17 @@ export class CollaborateurListComponent implements OnInit {
       console.error("ID de l'utilisateur non défini");
     }
   } */
+  creerCollaborateur(id: number) {
+    this.collaborateurService.creerCollaborateur(id).subscribe(
+      (response) => {
+        console.log('Collaborateur créé avec succès:', response);
+        this.loadUsers(); // Reload users to reflect the changes
+      },
+      (error) => {
+        console.error('Erreur lors de la création du collaborateur:', error);
+      }
+    );
+  }
   modifierCollaborateur(id: number): void {
     if (id) {
       this.router.navigate([`/main/collaborateurs/modifier/${id}`]);
@@ -81,7 +95,19 @@ export class CollaborateurListComponent implements OnInit {
   }
 
   archiverCollaborateur(id: number) {
-    // Logic to archive a collaborator
-    console.log('Archiver collaborateur', id);
+    this.collaborateurService.archiveUser(id).subscribe(
+      (response) => {
+        console.log('Collaborateur archivé', response);
+        this.loadUsers(); // Reload the user list to reflect changes
+      },
+      (error) => {
+        console.error("Erreur lors de l'archivage du collaborateur", error);
+      }
+    );
+  }
+  openCreateUserDialog() {
+    this.dialog.open(CreateUserPopupComponent, {
+      width: '400px',
+    });
   }
 }

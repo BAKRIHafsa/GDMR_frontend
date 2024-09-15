@@ -5,6 +5,9 @@
   <div *ngFor="let status of statuses">
     <div class="status">
       <h2>{{ status }}</h2>
+      <button *ngIf="status === 'created'" (click)="openCreateUserDialog()">
+        Ajouter
+      </button>
     </div>
     <div
       *ngIf="(usersByStatus.get(status) || []).length === 0"
@@ -35,6 +38,12 @@
           <td>{{ user.departement }}</td> -->
           <td>{{ user.role }}</td>
           <td>
+            <button
+              *ngIf="status === 'created'"
+              (click)="creerCollaborateur(user.idUser)"
+            >
+              Créer
+            </button>
             <button (click)="modifierCollaborateur(user.idUser)">
               Modifier
             </button>

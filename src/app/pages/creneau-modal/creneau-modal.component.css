@@ -1,0 +1,66 @@
+/* Container for the form */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Title of the form */
+.form-container h3 {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+/* Form labels */
+.form-container label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+/* Form inputs */
+.form-container input[type="date"],
+.form-container input[type="time"],
+.form-container select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Input for multiple select */
+.form-container select[multiple] {
+  height: 150px;
+  overflow-y: auto;
+}
+
+/* Buttons */
+.form-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.form-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Cancel button styling */
+.form-container button:nth-of-type(2) {
+  background-color: #6c757d;
+}
+
+.form-container button:nth-of-type(2):hover {
+  background-color: #5a6268;
+}

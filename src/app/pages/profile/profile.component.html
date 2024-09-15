@@ -1,0 +1,63 @@
+<div class="profile-container">
+  <div *ngIf="userProfile">
+    <h2>User Profile</h2>
+    <p><strong>Nom:</strong> {{ userProfile.nom }}</p>
+    <p><strong>Prénom:</strong> {{ userProfile.prenom }}</p>
+    <p><strong>Date de Naissance:</strong> {{ userProfile.dateNaissance }}</p>
+    <p><strong>Email:</strong> {{ userProfile.username }}</p>
+    <p><strong>Role:</strong> {{ userProfile.role }}</p>
+
+    <!-- Button to toggle the visibility of the change password section -->
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="toggleChangePasswordSection()"
+    >
+      {{
+        showChangePasswordSection
+          ? "Hide Change Password"
+          : "Show Change Password"
+      }}
+    </button>
+
+    <div *ngIf="showChangePasswordSection" class="change-password-section">
+      <h3>Change Password</h3>
+      <form (ngSubmit)="changePassword()">
+        <mat-form-field appearance="fill">
+          <mat-label>Current Password</mat-label>
+          <input
+            matInput
+            [type]="showCurrentPassword ? 'text' : 'password'"
+            [(ngModel)]="currentPassword"
+            name="currentPassword"
+            required
+          />
+          <mat-checkbox (change)="toggleShowCurrentPassword()"
+            >Show Password</mat-checkbox
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>New Password</mat-label>
+          <input
+            matInput
+            [type]="showNewPassword ? 'text' : 'password'"
+            [(ngModel)]="newPassword"
+            name="newPassword"
+            required
+          />
+          <mat-checkbox (change)="toggleShowNewPassword()"
+            >Show Password</mat-checkbox
+          >
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">
+          Change Password
+        </button>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="!userProfile">
+    <p>Loading profile...</p>
+  </div>
+</div>

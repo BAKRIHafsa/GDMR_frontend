@@ -1,0 +1,23 @@
+.calendar-container {
+  width: calc(100% - 280px); /* Ajusté pour correspondre à la marge gauche */
+  margin-left: 280px;
+  overflow-x: auto;
+  padding-right: 20px; /* Ajoute un peu d'espace à droite */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+::ng-deep .fc {
+  width: 100%; /* Le calendrier occupe toute la largeur de son conteneur */
+  min-width: 600px; /* Empêche le calendrier de devenir trop étroit */
+}
+
+@media (max-width: 1200px) {
+  .calendar-container {
+    width: calc(100% - 20px);
+    margin-left: 20px;
+  }
+}
+.full-calendar {
+  width: 100%;
+  height: auto;
+}

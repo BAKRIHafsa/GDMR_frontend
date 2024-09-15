@@ -1,0 +1,16 @@
+<div *ngIf="medecin" class="medecin-details-container">
+  <h2>Détails du Médecin</h2>
+  <p><strong>Nom :</strong> {{ medecin.nom }} {{ medecin.prenom }}</p>
+  <p><strong>Site de Travail :</strong> {{ medecin.siteTravail }}</p>
+  <p><strong>Spécialité :</strong> {{ medecin.specialite }}</p>
+  <p><strong>Qualification :</strong> {{ medecin.qualification }}</p>
+  <p><strong>Expérience :</strong> {{ medecin.experience }}</p>
+
+  <h3>Calendrier des disponibilités</h3>
+  <div class="calendar-container">
+    <full-calendar
+      [options]="calendarOptions"
+      class="full-calendar"
+    ></full-calendar>
+  </div>
+</div>

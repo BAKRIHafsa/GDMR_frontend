@@ -1,0 +1,49 @@
+/* profile.component.css */
+.profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.change-password-section {
+  margin-top: 20px;
+}
+
+mat-form-field {
+  display: block;
+  margin-bottom: 20px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+button.mat-raised-button {
+  margin-top: 20px;
+}
+
+.mat-checkbox {
+  display: block;
+  margin-top: 8px;
+}

@@ -1,0 +1,59 @@
+<div class="calendar-container">
+  <full-calendar [options]="calendarOptions"></full-calendar>
+</div>
+<!-- <div class="creneau">
+  <h3>Créer un Créneau</h3>
+  <form (ngSubmit)="creerCreneau()">
+    <label>Date:</label>
+    <input type="date" [(ngModel)]="newCreneau.date" name="date" required />
+
+    <label>Heure de Début:</label>
+    <input
+      type="time"
+      [(ngModel)]="newCreneau.heureDebutVisite"
+      name="heureDebut"
+      required
+    />
+
+    <label>Heure de Fin:</label>
+    <input
+      type="time"
+      [(ngModel)]="newCreneau.heureFinVisite"
+      name="heureFin"
+      required
+    />
+
+    <label>Type de Visite:</label>
+    <select [(ngModel)]="newCreneau.typeVisite" name="typeVisite" required>
+      <option value="VISITE_ANNUELLE">Visite Annuelle</option>
+      <option value="VISITE_EMBAUCHE">Visite Embauche</option>
+      <option value="VISITE_SPONTANEE">Visite Spontanée</option>
+      <option value="VISITE_SUITE_A_UNE_ABSENCE_PROLONGEE">
+        Visite Suite à une Absence Prolongée
+      </option>
+      <option value="VISITE_SUITE_A_UN_CONGE_DE_MATERNITE_OU_PROLONGATION">
+        Visite Suite à un Congé de Maternité ou Prolongation
+      </option>
+      <option value="VISITE_SUITE_A_UN_ACCIDENT_DU_TRAVAIL_OU_DU_TRAJET">
+        Visite Suite à un Accident du Travail ou du Trajet
+      </option>
+    </select>
+
+    <label>Collaborateurs Concernés:</label>
+    <select
+      multiple
+      [(ngModel)]="newCreneau.collaborateursIds"
+      name="collaborateursIds"
+    >
+      <option
+        *ngFor="let collaborateur of collaborateurs"
+        [value]="collaborateur.idUser"
+      >
+        {{ collaborateur.nom }} {{ collaborateur.prenom }}
+      </option>
+    </select>
+
+    <button type="submit">Créer le Créneau</button>
+  </form>
+</div>
+ -->

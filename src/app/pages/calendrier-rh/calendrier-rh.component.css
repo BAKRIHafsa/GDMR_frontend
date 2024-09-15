@@ -1,0 +1,86 @@
+/* Styles de base pour le calendrier */
+/* .fc {
+  max-width: 100%;
+  margin: 0 auto;
+} */
+
+/* Style pour les en-têtes de jour */
+/* .fc-daygrid-day-number {
+  font-weight: bold;
+} */
+
+/* Style pour les événements */
+/* .fc-event {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: #fff;
+  border-radius: 4px;
+  padding: 2px 5px;
+}
+ */
+/* Style pour les événements lors du survol */
+/* .fc-event:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+} */
+
+/* Style pour le conteneur de calendrier */
+/* .fc-toolbar {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+} */
+
+/* Style pour les boutons de la barre d'outils */
+/* .fc-button {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: #fff;
+}
+ */
+/* Style pour les boutons de la barre d'outils lors du survol */
+/* .fc-button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+  color: #fff;
+}
+ */
+/* Style pour le titre du calendrier */
+/* .fc-toolbar-title {
+  font-size: 1.5em;
+  font-weight: bold;
+} */
+
+/* Style pour le conteneur des jours du calendrier */
+/* .fc-daygrid-day {
+  min-height: 80px;
+} */
+
+/* .calendar-container {
+  width: calc(100% - 220px);
+  margin-left: 280px;
+  overflow-x: auto;
+  max-width: 100%;
+} */
+.calendar-container {
+  width: calc(100% - 280px); /* Ajusté pour correspondre à la marge gauche */
+  margin-left: 280px;
+  overflow-x: auto;
+  padding-right: 20px; /* Ajoute un peu d'espace à droite */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+::ng-deep .fc {
+  width: 100%; /* Le calendrier occupe toute la largeur de son conteneur */
+  min-width: 600px; /* Empêche le calendrier de devenir trop étroit */
+}
+
+@media (max-width: 1200px) {
+  .calendar-container {
+    width: calc(100% - 20px);
+    margin-left: 20px;
+  }
+}
+
+.creneau {
+  margin-left: 1000px;
+}

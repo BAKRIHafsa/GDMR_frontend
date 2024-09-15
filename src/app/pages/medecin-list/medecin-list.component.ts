@@ -38,9 +38,26 @@ export class MedecinListComponent implements OnInit {
       console.error('ID non défini pour la modification du collaborateur');
     }
   } */
-
+  creerMedecin(id: number) {
+    this.medecinService.creerMedecin(id).subscribe(
+      (response) => {
+        console.log('Collaborateur créé avec succès:', response);
+        this.loadUsers(); // Reload users to reflect the changes
+      },
+      (error) => {
+        console.error('Erreur lors de la création du collaborateur:', error);
+      }
+    );
+  }
   archiverMedecin(id: number) {
-    // Logic to archive a collaborator
-    console.log('Archiver Medecin', id);
+    this.medecinService.archiveUser(id).subscribe(
+      (response) => {
+        console.log('Collaborateur archivé', response);
+        this.loadUsers(); // Reload the user list to reflect changes
+      },
+      (error) => {
+        console.error("Erreur lors de l'archivage du collaborateur", error);
+      }
+    );
   }
 }
