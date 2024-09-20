@@ -5,7 +5,7 @@
   <div *ngFor="let status of statuses">
     <div class="status">
       <h2>{{ status }}</h2>
-      <button *ngIf="status === 'created'" (click)="openCreateUserDialog()">
+      <button *ngIf="status === 'created'" (click)="openCreateCollabDialog()">
         Ajouter
       </button>
     </div>

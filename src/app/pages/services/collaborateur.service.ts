@@ -45,8 +45,8 @@ export class CollaborateurService {
   }
   creerCollaborateur(id: number): Observable<string> {
     return this.http.post<string>(
-      `${this.AapiUrl}/users/${id}`,
-      {},
+      `${this.AapiUrl}/users`,
+      {idUser: id},
       {
         responseType: 'text' as 'json', // Specify response type as text
       }

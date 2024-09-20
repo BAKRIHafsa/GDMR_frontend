@@ -13,7 +13,7 @@ import { AmedecinslistComponent } from './pages/amedecinslist/amedecinslist.comp
 import { AcollaborateurslistComponent } from './pages/acollaborateurslist/acollaborateurslist.component';
 import { CalendrierRHComponent } from './pages/calendrier-rh/calendrier-rh.component';
 import { CalendrierMedComponent } from './pages/calendrier-med/calendrier-med.component';
-import { DashboardRHComponent } from './pages/dashboard/dashboard-rh.component';
+import { DashboardRHComponent } from './pages/dashboard-rh/dashboard-rh.component';
 import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin.component';
 import { DashboardMedComponent } from './pages/dashboard-med/dashboard-med.component';
 import { DashboardCollabComponent } from './pages/dashboard-collab/dashboard-collab.component';

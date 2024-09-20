@@ -7,7 +7,7 @@ import { DashboardRHDTO } from '../models/DashboardRHDTO.dto';
   providedIn: 'root',
 })
 export class DashboardRHService {
-  private apiUrl = 'http://localhost:8080/api'; // Remplacez par votre URL d'API
+  private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
 

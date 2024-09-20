@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MedecinService } from '../services/medecin.service';
 import { User } from '../models/user.model'; // Import the User interface
+import { MatDialog } from '@angular/material/dialog';
+import { CreateMedPopupComponent } from '../create-med-popup/create-med-popup.component';
+
 
 @Component({
   selector: 'app-collaborateurs-list',
@@ -13,7 +16,8 @@ export class MedecinListComponent implements OnInit {
   usersByStatus: Map<string, User[]> = new Map();
   statuses: string[] = [];
 
-  constructor(private medecinService: MedecinService, private router: Router) {}
+  constructor(private medecinService: MedecinService, private router: Router,private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.loadUsers();
@@ -59,5 +63,10 @@ export class MedecinListComponent implements OnInit {
         console.error("Erreur lors de l'archivage du collaborateur", error);
       }
     );
+  }
+  openCreateMedDialog() {
+    this.dialog.open(CreateMedPopupComponent, {
+      width: '400px',
+    });
   }
 }

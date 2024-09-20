@@ -1,0 +1,50 @@
+<div class="create-med-popup">
+    <h2>Ajouter un nouvel medecin</h2>
+    <form (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Nom"
+        [(ngModel)]="user.nom"
+        name="nom"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Prénom"
+        [(ngModel)]="user.prenom"
+        name="prenom"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Date de Naissance"
+        [(ngModel)]="user.dateNaissance"
+        name="dateNaissance"
+        type="date"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Rôle" [(ngModel)]="user.role" name="role" required>
+        <mat-option value="MEDECIN">Médecin</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Nom d'utilisateur (username)"
+        [(ngModel)]="user.username"
+        name="username"
+        required
+      />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Enregistrer</button>
+    <button mat-button type="button" (click)="close()">Annuler</button>
+  </form>
+  </div>
+  

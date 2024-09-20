@@ -1,105 +1,129 @@
-.title {
-  text-align: center; /* Centre le titre */
-  margin-bottom: 30px; /* Espace sous le titre */
-  margin-top: 10px;
+/* Styles de base */
+body {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.title, .status {
+  text-align: center;
+  margin-bottom: 1.875rem;
+  margin-top: 0.625rem;
 }
 
 .title h1 {
-  font-size: 24px; /* Taille de la police du titre */
-  color: #333; /* Couleur du texte du titre */
-  font-weight: bold; /* Met le texte en gras */
-}
-.status {
-  text-align: center; /* Centre le titre */
-  margin-bottom: 30px; /* Espace sous le titre */
-  margin-top: 10px;
-}
-.status h2 {
-  font-size: 20px; /* Taille de la police du titre */
-  color: #333; /* Couleur du texte du titre */
+  font-size: 1.5rem;
+  color: #333;
   font-weight: bold;
 }
+
+.status h2 {
+  font-size: 1.25rem;
+  color: #333;
+  font-weight: bold;
+}
+
 .collaborateurs-list-container {
-  display: flex; /* Use flexbox to arrange tables horizontally */
-  margin-left: 250px; /* Margin to leave space for the sidebar */
-  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 15.625rem;
+  padding: 1.25rem;
   box-sizing: border-box;
-  gap: 40px; /* Space between tables */
+  gap: 2.5rem;
 }
 
-/* Each table container styling */
 .collaborateurs-list-container > div {
-  flex: 1; /* Allow tables to take available space */
-}
-.no-records-message {
-  background-color: #f8d7da; /* Couleur de fond rouge clair */
-  color: #721c24; /* Couleur du texte rouge foncé */
-  border: 1px solid #f5c6cb; /* Bordure rouge clair */
-  border-radius: 4px; /* Coins arrondis */
-  padding: 15px; /* Espacement interne */
-  margin-top: 10px; /* Espace au-dessus du message */
-  text-align: center; /* Centre le texte */
-}
-tbody tr {
-  height: 60px; /* Adjust the height as needed */
+  flex: 1 1 300px;
 }
 
-/* Table styling */
+.no-records-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 0.25rem;
+  padding: 0.9375rem;
+  margin-top: 0.625rem;
+  text-align: center;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #fff; /* Background color for the table */
-  border-radius: 8px; /* Rounded corners for the table */
+  background-color: #fff;
+  border-radius: 0.5rem;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 thead {
-  background-color: #3498db; /* Header background color */
-  color: #fff; /* Header text color */
+  background-color: #3498db;
+  color: #fff;
 }
 
-th,
-td {
-  padding: 12px 15px; /* Padding for cells */
-  text-align: left; /* Align text to the left */
-  text-align: center; /* Centre le titre */
+th, td {
+  padding: 0.75rem 0.9375rem;
+  text-align: center;
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2; /* Zebra striping for rows */
+  background-color: #f2f2f2;
 }
 
 th {
-  border-bottom: 2px solid #ddd; /* Border at the bottom of header cells */
+  border-bottom: 2px solid #ddd;
 }
 
 td {
-  border-bottom: 1px solid #ddd; /* Border at the bottom of data cells */
+  border-bottom: 1px solid #ddd;
 }
 
-/* Button styling */
+/* Style des boutons */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.625rem; /* Augmenté pour plus d'espace entre les boutons */
+}
+
 button {
-  padding: 8px 12px; /* Padding for buttons */
+  padding: 0.5rem 0.75rem;
   border: none;
-  border-radius: 4px; /* Rounded corners for buttons */
+  border-radius: 0.25rem;
   color: #fff;
-  background-color: #3498db; /* Button background color */
+  background-color: #3498db;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-right: 10px; /* Space between buttons */
+  margin-right: 0.625rem; /* Ajout d'une marge à droite pour plus d'espace */
 }
 
-/* Remove margin on the last button if needed */
-td button:last-child {
-  margin-right: 0; /* Remove right margin for the last button */
+button:last-child {
+  margin-right: 0; /* Supprime la marge du dernier bouton pour éviter un espace superflu */
 }
 
 button:hover {
-  background-color: #2980b9; /* Darker background color on hover */
+  background-color: #2980b9;
 }
 
-h2 {
-  margin-top: 20px; /* Color for section headers */
-  margin-bottom: 10px;
+/* Media queries pour la responsivité */
+@media screen and (max-width: 1024px) {
+  /* ... */
+}
+
+@media screen and (max-width: 768px) {
+  /* ... */
+}
+
+@media screen and (max-width: 480px) {
+  .button-container {
+    flex-direction: column;
+    gap: 0.5rem; /* Espace vertical entre les boutons sur petits écrans */
+  }
+  
+  button {
+    width: 100%;
+    margin-right: 0; /* Supprime la marge droite sur petits écrans */
+    margin-bottom: 0.3125rem;
+  }
+  
+  button:last-child {
+    margin-bottom: 0; /* Supprime la marge du dernier bouton */
+  }
 }

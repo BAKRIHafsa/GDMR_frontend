@@ -33,7 +33,7 @@ import { AmedecinslistComponent } from './pages/amedecinslist/amedecinslist.comp
 import { AcollaborateurslistComponent } from './pages/acollaborateurslist/acollaborateurslist.component';
 import { CalendrierRHComponent } from './pages/calendrier-rh/calendrier-rh.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
-import { DashboardRHComponent } from './pages/dashboard/dashboard-rh.component';
+import { DashboardRHComponent } from './pages/dashboard-rh/dashboard-rh.component';
 import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin.component';
 import { DashboardMedComponent } from './pages/dashboard-med/dashboard-med.component';
 import { DashboardCollabComponent } from './pages/dashboard-collab/dashboard-collab.component';
@@ -44,7 +44,8 @@ import { CalendrierRhVisiteComponent } from './pages/calendrier-rh-visite/calend
 import { CalendrierCollabComponent } from './pages/calendrier-collab/calendrier-collab.component';
 import { VisitedetailscollabComponent } from './pages/visitedetailscollab/visitedetailscollab.component';
 import { CreneauModalComponent } from './pages/creneau-modal/creneau-modal.component';
-import { CreateUserPopupComponent } from './pages/create-user-popup/create-user-popup.component';
+import { CreateCollabPopupComponent } from './pages/create-collab-popup/create-collab-popup.component';
+import { CreateMedPopupComponent } from './pages/create-med-popup/create-med-popup.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { CreateUserPopupComponent } from './pages/create-user-popup/create-user-
     CalendrierCollabComponent,
     VisitedetailscollabComponent,
     CreneauModalComponent,
-    CreateUserPopupComponent,
+    CreateCollabPopupComponent,
+    CreateMedPopupComponent,
   ],
   imports: [
     BrowserModule,

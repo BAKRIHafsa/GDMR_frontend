@@ -5,6 +5,9 @@
   <div *ngFor="let status of statuses">
     <div class="status">
       <h2>{{ status }}</h2>
+      <button *ngIf="status === 'created'" (click)="openCreateMedDialog()">
+        Ajouter
+      </button>
     </div>
     <div
       *ngIf="(usersByStatus.get(status) || []).length === 0"

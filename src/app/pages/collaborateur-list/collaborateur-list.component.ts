@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CollaborateurService } from '../services/collaborateur.service';
 import { User } from '../models/user.model';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateUserPopupComponent } from '../create-user-popup/create-user-popup.component';
+import { CreateCollabPopupComponent } from '../create-collab-popup/create-collab-popup.component';
 
 @Component({
   selector: 'app-collaborateurs-list',
@@ -105,8 +105,8 @@ export class CollaborateurListComponent implements OnInit {
       }
     );
   }
-  openCreateUserDialog() {
-    this.dialog.open(CreateUserPopupComponent, {
+  openCreateCollabDialog() {
+    this.dialog.open(CreateCollabPopupComponent, {
       width: '400px',
     });
   }
