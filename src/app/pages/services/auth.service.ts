@@ -63,6 +63,10 @@ export class AuthService {
       })
     );
   }
+  
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/users/${id}`);
+  }
 
   getCurrentUserRole(): Observable<{ role: string }> {
     return this.http.get<{ role: string }>(`${this.apiUrl}/user/role`).pipe(

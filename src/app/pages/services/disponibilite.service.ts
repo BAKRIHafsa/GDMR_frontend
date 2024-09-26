@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
+
 
 export interface Disponibilite {
   id?: number;
@@ -8,7 +10,16 @@ export interface Disponibilite {
   heuredebut: string;
   heurefin: string;
   medecin: { idUser: number };
+} 
+
+export interface DisponibiliteDetails {
+  id?: number;
+  date: string;
+  heuredebut: string;
+  heurefin: string;
+  medecin: User;
 }
+
 export interface CreneauModal {
   date: string;
   heuresDisponibles: Disponibilite[];
@@ -57,7 +68,7 @@ export class DisponibiliteService {
     return this.http.get<number>(`${this.apiUrl}/user/current-med-id`);
   }
 
-  getDisponibilites(): Observable<Disponibilite[]> {
-    return this.http.get<Disponibilite[]>(`${this.apiUrl}/disponibilites/all`);
+  getDisponibilites(): Observable<DisponibiliteDetails[]> {
+    return this.http.get<DisponibiliteDetails[]>(`${this.apiUrl}/disponibilites/all`);
   }
 }

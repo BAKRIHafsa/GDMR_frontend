@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { FullCalendarModule } from '@fullcalendar/angular'; // Import FullCalendarModule
+import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { CommonModule } from '@angular/common'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LayoutComponent } from './pages/layout/layout.component';
@@ -46,6 +47,7 @@ import { VisitedetailscollabComponent } from './pages/visitedetailscollab/visite
 import { CreneauModalComponent } from './pages/creneau-modal/creneau-modal.component';
 import { CreateCollabPopupComponent } from './pages/create-collab-popup/create-collab-popup.component';
 import { CreateMedPopupComponent } from './pages/create-med-popup/create-med-popup.component';
+import { DisponibiliteDetailComponent } from './pages/disponibilite-detail/disponibilite-detail.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,7 @@ import { CreateMedPopupComponent } from './pages/create-med-popup/create-med-pop
     CreneauModalComponent,
     CreateCollabPopupComponent,
     CreateMedPopupComponent,
+    DisponibiliteDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,10 +94,12 @@ import { CreateMedPopupComponent } from './pages/create-med-popup/create-med-pop
     MatInputModule,
     MatButtonModule,
     FullCalendarModule,
+    CommonModule,
     MatIconModule,
     MatSelectModule,
     BrowserAnimationsModule,
   ],
+  //schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     provideAnimationsAsync(),

@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Détails de la disponibilité</h2>
+<mat-dialog-content>
+  <p><strong>Médecin:</strong> {{data.medecin.nom}} {{data.medecin.prenom}}</p>
+  <p><strong>Date:</strong> {{data.date | date:'dd/MM/yyyy'}}</p>
+  <p><strong>Heure de début:</strong> {{data.heuredebut}}</p>
+  <p><strong>Heure de fin:</strong> {{data.heurefin}}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>
