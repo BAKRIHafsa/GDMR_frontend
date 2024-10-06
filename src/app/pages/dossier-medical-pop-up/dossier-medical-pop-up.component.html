@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Ajouter votre dossier médical</h2>
+<mat-dialog-content>
+  <form [formGroup]="antecedantForm">
+    <mat-form-field>
+      <mat-label>Sexe</mat-label>
+      <mat-select formControlName="sexe">
+        <mat-option *ngFor="let sexe of sexes" [value]="sexe">{{ sexe }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Hauteur (en cm)</mat-label>
+        <input matInput type="number" formControlName="height" />
+        <mat-hint>Entrez votre taille en centimètres</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+    <mat-label>Poids (en kg)</mat-label>
+      <input matInput type="number" formControlName="weight" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Groupe sanguin</mat-label>
+      <mat-select formControlName="groupeSanguin">
+        <mat-option *ngFor="let group of bloodGroups" [value]="group">{{ group }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Allergies</mat-label>
+      <input matInput formControlName="allergies" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Médicaments</mat-label>
+      <input matInput formControlName="medicaments" />
+    </mat-form-field>
+
+    <mat-checkbox formControlName="fume">Fume</mat-checkbox>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Annuler</button>
+  <button mat-button (click)="saveAntecedant()" [disabled]="antecedantForm.invalid">Ajouter</button>
+</mat-dialog-actions>

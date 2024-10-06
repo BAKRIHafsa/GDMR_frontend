@@ -1,0 +1,45 @@
+<div class="medical-details">
+<h2>Dossier Médical</h2>
+
+<div *ngIf="antecedant">
+    <div class="info-row">
+        <strong>Sexe:</strong>
+        <span *ngIf="!isEditing">{{ antecedant.sexe }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="antecedant.sexe" />
+    </div>
+<div>
+    <div class="info-row">
+    <strong>Taille:</strong>
+    <span *ngIf="!isEditing">{{ antecedant.height }} cm</span>
+    <input *ngIf="isEditing" [(ngModel)]="antecedant.height" type="number" />
+  </div>
+
+  <div class="info-row">
+    <strong>Poids:</strong>
+    <span *ngIf="!isEditing">{{ antecedant.weight }} kg</span>
+    <input *ngIf="isEditing" [(ngModel)]="antecedant.weight" type="number" />
+  </div>
+
+  <div class="info-row">
+    <strong>Groupe Sanguin:</strong>
+    <span *ngIf="!isEditing">{{ antecedant.groupeSanguin }}</span>
+    <select *ngIf="isEditing" [(ngModel)]="antecedant.groupeSanguin">
+      <option *ngFor="let group of bloodGroups" [value]="group">{{ group }}</option>
+    </select>
+  </div>
+
+  <div class="info-row">
+    <strong>Allergies:</strong>
+    <span *ngIf="!isEditing">{{ antecedant.allergies }}</span>
+    <input *ngIf="isEditing" [(ngModel)]="antecedant.allergies" />
+  </div>
+
+  <div class="button-container">
+  <button mat-button (click)="toggleEdit()">
+    {{ isEditing ? 'Annuler' : 'Modifier' }}
+  </button>
+
+  <button mat-button class="save-button" *ngIf="isEditing" (click)="saveChanges()">Sauvegarder</button>
+</div>
+</div>
+</div>

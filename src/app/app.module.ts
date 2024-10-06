@@ -49,6 +49,8 @@ import { CreateCollabPopupComponent } from './pages/create-collab-popup/create-c
 import { CreateMedPopupComponent } from './pages/create-med-popup/create-med-popup.component';
 import { DisponibiliteDetailComponent } from './pages/disponibilite-detail/disponibilite-detail.component';
 import { MedecinsDisponiblesComponent } from './pages/medecins-disponibles/medecins-disponibles.component';
+import { DossierMedicalPopUpComponent } from './pages/dossier-medical-pop-up/dossier-medical-pop-up.component';
+import { DossierMedicalDetailsComponent } from './pages/dossier-medical-details/dossier-medical-details.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,8 @@ import { MedecinsDisponiblesComponent } from './pages/medecins-disponibles/medec
     CreateMedPopupComponent,
     DisponibiliteDetailComponent,
     MedecinsDisponiblesComponent,
+    DossierMedicalPopUpComponent,
+    DossierMedicalDetailsComponent,
   ],
   imports: [
     BrowserModule,

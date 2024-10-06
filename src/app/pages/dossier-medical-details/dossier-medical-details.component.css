@@ -1,0 +1,123 @@
+/* Conteneur principal */
+.medical-details {
+    max-width:600px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Titre */
+  h2 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #3498db;
+  }
+  
+  /* Style pour chaque ligne d'information */
+  .info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .info-row:hover {
+    background-color: #e9ecef;
+  }
+  
+  /* Label (texte en gras) */
+  .info-row strong {
+    flex: 0 0 140px;
+    color: #34495e;
+    font-weight: 600;
+  }
+  
+  /* Valeur */
+  .info-row span {
+    flex: 1;
+    color: #2c3e50;
+  }
+  
+  /* Styles pour les inputs en mode édition */
+  .info-row input,
+  .info-row select {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #2c3e50;
+    transition: border-color 0.3s ease;
+  }
+  
+  .info-row input:focus,
+  .info-row select:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  /* Conteneur pour les boutons */
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  /* Style des boutons */
+  button[mat-button] {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  /* Bouton Modifier */
+  button[mat-button]:not(.save-button) {
+    background-color: #f5f5f5;
+    color: #2c3e50;
+  }
+  
+  button[mat-button]:not(.save-button):hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Bouton Sauvegarder */
+  .save-button {
+    background-color: #3498db !important;
+    color: white !important;
+  }
+  
+  .save-button:hover {
+    background-color: #2980b9 !important;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 600px) {
+    .medical-details {
+      padding: 16px;
+    }
+  
+    .info-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .info-row strong {
+      margin-bottom: 4px;
+    }
+    
+    .info-row input,
+    .info-row select {
+      width: 100%;
+    }
+  }

@@ -57,6 +57,49 @@
       </form>
     </div>
   </div>
+  <!-- Formulaire pour l'antecedant -->
+  <!-- <h3>Medical History (Antecedant)</h3>
+  <form [formGroup]="antecedantForm" (ngSubmit)="saveAntecedant()">
+    <mat-form-field appearance="fill">
+      <mat-label>Sexe</mat-label>
+      <mat-select formControlName="sexe">
+        <mat-option *ngFor="let sexe of sexes" [value]="sexe">{{ sexe }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Height (cm)</mat-label>
+      <input matInput type="number" formControlName="height" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Weight (kg)</mat-label>
+      <input matInput type="number" formControlName="weight" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Groupe Sanguin</mat-label>
+      <mat-select formControlName="groupeSanguin">
+        <mat-option *ngFor="let bloodGroup of bloodGroups" [value]="bloodGroup">{{ bloodGroup }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Allergies</mat-label>
+      <input matInput formControlName="allergies" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Medicaments</mat-label>
+      <input matInput formControlName="medicaments" />
+    </mat-form-field>
+
+    <mat-checkbox formControlName="fume">Do you smoke?</mat-checkbox>
+
+    <button mat-raised-button color="primary" type="submit">Enregistrer</button>
+  </form> -->
+  <button mat-button (click)="openDossierMedicalPopUpDialog()" [disabled]="dossierMedicalExists">Ajouter votre dossier médical</button>
+  <button mat-button (click)="openDossierMedicalDetails()">Consulter mon dossier médical</button>
   <div *ngIf="!userProfile">
     <p>Loading profile...</p>
   </div>
