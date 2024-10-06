@@ -15,6 +15,7 @@ export class CreateCollabPopupComponent {
     username: '',
     dateNaissance: '',
     role: '',
+    departement:'',
   };
 
   constructor(

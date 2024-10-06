@@ -3,6 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CreneauModal } from '../services/disponibilite.service';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-creneau-modal',
   templateUrl: './creneau-modal.component.html',
@@ -12,10 +14,10 @@ export class CreneauModalComponent implements OnInit {
   collaborateurs: User[] = [];
   data = {
     date: '',
-    heureDebutCreneau: '',
-    heureFinCreneau: '',
+    heureDebutVisite: '',
+    heureFinVisite: '',
     typeVisite: '',
-    collaborateursIds: [],
+    collaborateurId: null,
   };
 
   typeVisiteOptions: string[] = [
@@ -30,7 +32,8 @@ export class CreneauModalComponent implements OnInit {
   constructor(
     private authService: AuthService,
     public dialogRef: MatDialogRef<CreneauModalComponent>, // Injection de MatDialogRef
-    @Inject(MAT_DIALOG_DATA) public inputData: any // Injection des données de la boîte de dialogue
+    @Inject(MAT_DIALOG_DATA) public inputData: any, // Injection des données de la boîte de dialogue
+     private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,10 +55,19 @@ export class CreneauModalComponent implements OnInit {
   }
 
   onSave(): void {
-    this.dialogRef.close(this.data);
+    // Vérifiez que toutes les données nécessaires sont remplies avant de fermer la boîte de dialogue
+    if (this.data.date && this.data.heureDebutVisite && this.data.heureFinVisite && this.data.collaborateurId) {
+      this.dialogRef.close(this.data);  // Retourner les données complètes
+    } else {
+      console.error('Certaines données sont manquantes.');
+    }
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  goToMedecins(){
+    this.router.navigate(['/medecins-disponibles'], { state: { data: this.data } });
   }
 }

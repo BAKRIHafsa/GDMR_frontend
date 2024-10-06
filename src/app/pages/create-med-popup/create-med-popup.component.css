@@ -1,72 +1,88 @@
-.create-umed-popup {
-    width: 100%;
-    max-width: 600px; /* Maximum width for larger screens */
-    margin: auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Ensures padding is included in the width */
-  }
-  
-  .create-med-popup h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: 600;
-  }
-  
-  .create-med-popup form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  mat-form-field {
-    width: 100%; /* Full width of the form fields */
-  }
-  
-  .create-med-popup button[type="submit"],
-  .create-med-popup button[type="button"] {
-    margin-top: 20px;
-    width: 100%;
-    font-weight: bold;
-  }
-  
-  .create-med-popup button[type="button"] {
-    color: #555;
-  }
-  
-  @media (min-width: 768px) {
-    .create-med-popup {
-      padding: 40px;
-    }
-  
-    mat-form-field {
-      max-width: 80%; /* Reduce width for larger screens for a centered look */
-      margin: auto;
-    }
-  
-    .create-med-popup button[type="submit"],
-    .create-med-popup button[type="button"] {
-      max-width: 80%; /* Ensure buttons match form field width */
-      margin: 20px auto 0 auto; /* Center-align buttons */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .create-med-popup {
-      padding: 10px;
-    }
-  
-    mat-form-field {
-      width: 100%; /* Ensures form fields use full width on smaller screens */
-    }
-  
-    .create-med-popup button[type="submit"],
-    .create-med-popup button[type="button"] {
-      width: 100%;
-    }
-  }
-  
+.popup-container {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
+  max-width: 100%;
+}
+
+h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  color: #555;
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+input:focus {
+  border-color: #0066cc;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+}
+
+input[type="date"] {
+  padding: 7px 12px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  flex: 1;
+}
+
+button[type="submit"] {
+  background-color: #0066cc;
+  color: white;
+}
+
+button[type="button"] {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}

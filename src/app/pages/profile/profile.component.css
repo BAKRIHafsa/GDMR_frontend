@@ -47,3 +47,12 @@ button.mat-raised-button {
   display: block;
   margin-top: 8px;
 }
+.custom-green-button {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.custom-green-button:hover {
+  background-color: #45a049; /* Darker Green for hover effect */
+}
+

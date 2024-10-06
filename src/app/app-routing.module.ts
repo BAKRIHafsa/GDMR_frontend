@@ -20,6 +20,8 @@ import { DashboardCollabComponent } from './pages/dashboard-collab/dashboard-col
 import { MedecinDetailsComponent } from './pages/medecin-details/medecin-details.component';
 import { CalendrierRhVisiteComponent } from './pages/calendrier-rh-visite/calendrier-rh-visite.component';
 import { CalendrierCollabComponent } from './pages/calendrier-collab/calendrier-collab.component';
+import { CreneauModalComponent } from './pages/creneau-modal/creneau-modal.component'; 
+import { MedecinsDisponiblesComponent } from './pages/medecins-disponibles/medecins-disponibles.component'; 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -100,6 +102,14 @@ const routes: Routes = [
       {
         path: 'calendrier-rh-visite',
         component: CalendrierRhVisiteComponent,
+      },
+      {
+        path: 'creer-creneau', 
+        component: CreneauModalComponent,
+        children: [{
+          path: 'medecins-disponibles', 
+          component: MedecinsDisponiblesComponent,
+        }]
       },
     ],
   },

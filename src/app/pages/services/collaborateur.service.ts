@@ -43,13 +43,7 @@ export class CollaborateurService {
   archiveUser(id: number): Observable<User> {
     return this.http.put<User>(`${this.AapiUrl}/users/${id}/archive`, {});
   }
-  creerCollaborateur(id: number): Observable<string> {
-    return this.http.post<string>(
-      `${this.AapiUrl}/users`,
-      {idUser: id},
-      {
-        responseType: 'text' as 'json', // Specify response type as text
-      }
-    );
+  activerCollab(id: number): Observable<any> {
+    return this.http.put(`${this.AapiUrl}/activerCollab/${id}`, {});
   }
 }

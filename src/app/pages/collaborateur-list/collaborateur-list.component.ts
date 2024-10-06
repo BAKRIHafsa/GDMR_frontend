@@ -4,6 +4,8 @@ import { CollaborateurService } from '../services/collaborateur.service';
 import { User } from '../models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCollabPopupComponent } from '../create-collab-popup/create-collab-popup.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-collaborateurs-list',
@@ -17,7 +19,8 @@ export class CollaborateurListComponent implements OnInit {
   constructor(
     private collaborateurService: CollaborateurService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -76,15 +79,16 @@ export class CollaborateurListComponent implements OnInit {
     }
   } */
   creerCollaborateur(id: number) {
-    this.collaborateurService.creerCollaborateur(id).subscribe(
-      (response) => {
-        console.log('Collaborateur créé avec succès:', response);
-        this.loadUsers(); // Reload users to reflect the changes
+    this.collaborateurService.activerCollab(id).subscribe({
+      next: (response) => {
+        this.snackBar.open('Le collaborateur a été activé avec succès', 'Fermer', { duration: 3000 });
+            this.loadUsers();
       },
-      (error) => {
-        console.error('Erreur lors de la création du collaborateur:', error);
+      error: (err) => {
+        console.error('Erreur lors de l\'activation du collaborateur:', err);
+        this.snackBar.open('Erreur lors de l\'activation du médecin', 'Fermer', { duration: 3000 });
       }
-    );
+    });
   }
   modifierCollaborateur(id: number): void {
     if (id) {

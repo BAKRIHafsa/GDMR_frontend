@@ -48,6 +48,7 @@ import { CreneauModalComponent } from './pages/creneau-modal/creneau-modal.compo
 import { CreateCollabPopupComponent } from './pages/create-collab-popup/create-collab-popup.component';
 import { CreateMedPopupComponent } from './pages/create-med-popup/create-med-popup.component';
 import { DisponibiliteDetailComponent } from './pages/disponibilite-detail/disponibilite-detail.component';
+import { MedecinsDisponiblesComponent } from './pages/medecins-disponibles/medecins-disponibles.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { DisponibiliteDetailComponent } from './pages/disponibilite-detail/dispo
     CreateCollabPopupComponent,
     CreateMedPopupComponent,
     DisponibiliteDetailComponent,
+    MedecinsDisponiblesComponent,
   ],
   imports: [
     BrowserModule,

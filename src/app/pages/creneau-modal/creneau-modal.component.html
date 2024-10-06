@@ -6,7 +6,7 @@
   <label>Heure de Début du Créneau:</label>
   <input
     type="time"
-    [(ngModel)]="data.heureDebutCreneau"
+    [(ngModel)]="data.heureDebutVisite"
     name="heureDebut"
     required
   />
@@ -14,7 +14,7 @@
   <label>Heure de Fin du Créneau:</label>
   <input
     type="time"
-    [(ngModel)]="data.heureFinCreneau"
+    [(ngModel)]="data.heureFinVisite"
     name="heureFin"
     required
   />
@@ -28,9 +28,9 @@
 
   <label>Collaborateurs Concernés:</label>
   <select
-    multiple
-    [(ngModel)]="data.collaborateursIds"
-    name="collaborateursIds"
+    [(ngModel)]="data.collaborateurId"
+    name="collaborateurId"
+    required
   >
     <option
       *ngFor="let collaborateur of collaborateurs"
@@ -42,4 +42,5 @@
 
   <button type="button" (click)="onSave()">Créer le Créneau</button>
   <button type="button" (click)="onNoClick()">Annuler</button>
+  <button type="button" (click)="goToMedecins()">Suivant</button>
 </form>

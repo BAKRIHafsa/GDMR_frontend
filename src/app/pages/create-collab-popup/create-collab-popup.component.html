@@ -1,5 +1,7 @@
-<div class="create-collab-popup">
-  <h2>Ajouter un nouvel Collaborateur</h2>
+<div class="popup-dialog">
+  <div class="popup-header">
+    <h2 class="popup-title">Ajouter un collaborateur</h2>
+  </div>
   <form (ngSubmit)="onSubmit()">
   <mat-form-field>
     <input
@@ -38,13 +40,24 @@
   <mat-form-field>
     <input
       matInput
+      placeholder="Département"
+      [(ngModel)]="user.departement"
+      name="departement"
+      required
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
       placeholder="Nom d'utilisateur (username)"
       [(ngModel)]="user.username"
       name="username"
       required
     />
   </mat-form-field>
+  <div class="popup-actions">
   <button mat-raised-button color="primary" type="submit">Enregistrer</button>
   <button mat-button type="button" (click)="close()">Annuler</button>
+  </div>
 </form>
 </div>

@@ -102,23 +102,27 @@ export class CalendrierMedComponent implements OnInit {
         });
     }
   } */
-  loadDisponibilites(): void {
-    if (this.medecinId) {
-      this.disponibiliteService
-        .getDisponibilitesByMedecin(this.medecinId)
-        .subscribe((disponibilites) => {
-          this.calendarOptions.events = disponibilites.map((d) => ({
-            title: `de ${d.heuredebut?.substring(
-              0,
-              5
-            )} à ${d.heurefin?.substring(0, 5)}`, // Formattage de l'heure pour le titre
-            start: `${d.date}T${d.heuredebut}`,
-            end: `${d.date}T${d.heurefin}`,
-            id: d.id !== undefined ? d.id.toString() : 'unknown',
-          }));
-        });
+    loadDisponibilites(): void {
+      if (this.medecinId) {
+        this.disponibiliteService
+          .getDisponibilitesByMedecin(this.medecinId)
+          .subscribe((disponibilites) => {
+            const events = disponibilites.map((d) => ({
+              title: `de ${d.heuredebut?.substring(0, 5)} à ${d.heurefin?.substring(0, 5)}`, // Formattage de l'heure pour le titre
+              start: `${d.date}T${d.heuredebut}`,
+              end: `${d.date}T${d.heurefin}`,
+              id: d.id !== undefined ? d.id.toString() : 'unknown',
+            }));
+    
+            // Update the calendar's events with new data
+            this.calendarOptions = {
+              ...this.calendarOptions,
+              events, // Trigger a refresh of events in FullCalendar
+            };
+          });
+      }
     }
-  }
+    
 
   /* handleDateClick(arg: any): void {
     // Afficher un dialogue pour ajouter une nouvelle disponibilité
