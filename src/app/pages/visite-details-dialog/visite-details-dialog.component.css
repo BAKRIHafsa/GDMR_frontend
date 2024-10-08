@@ -1,0 +1,57 @@
+/* Style for the dialog title */
+.mat-dialog-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #3f51b5; /* Material primary color */
+  }
+  
+  /* General styling for the content */
+  .mat-dialog-content {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Bold the labels */
+  .mat-dialog-content p {
+    margin: 8px 0;
+  }
+  
+  .mat-dialog-content p strong {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Add a light background for better readability */
+  .mat-dialog-content {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  /* Customize the buttons */
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 0 0;
+  }
+  
+  .mat-dialog-actions button {
+    font-size: 14px;
+    color: #fff;
+    background-color: #3f51b5; /* Material primary color */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .mat-dialog-actions button:hover {
+    background-color: #303f9f;
+  }
+  
+  .mat-dialog-actions button:focus {
+    outline: none;
+  }
+  

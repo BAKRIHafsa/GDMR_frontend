@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Détails de la visite</h1>
+<div mat-dialog-content>
+  <p><strong>Type de visite:</strong> {{ data.typeVisite }}</p>
+  <p><strong>Date:</strong> {{ data.date | date: 'longDate' }}</p>
+  <p><strong>Heure de début:</strong> {{ data.heureDebutVisite | date: 'shortTime' }}</p>
+  <p><strong>Heure de fin:</strong> {{ data.heureFinVisite | date: 'shortTime' }}</p>
+  <p><strong>Motif:</strong> {{ data.motif || 'Non défini' }}</p>
+  <p><strong>Statut:</strong> {{ data.statusVisite }}</p>
+  <p><strong>Collaborateur:</strong> {{ data.collaborateur?.nom || 'Non défini' }}</p>
+  <p><strong>Médecin:</strong> {{ data.medecin?.nom || 'Non défini' }}</p>
+  <p><strong>Justification non validée:</strong> {{ data.justifNonValide }}</p>
+  <p><strong>Justification annulation (médecin):</strong> {{ data.justifAnnuleMedecin }}</p>
+  <p><strong>Justification annulation (collaborateur):</strong> {{ data.justifAnnuleCollaborateur }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Fermer</button>
+</div>

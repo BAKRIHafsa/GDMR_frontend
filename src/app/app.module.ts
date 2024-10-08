@@ -54,6 +54,7 @@ import { DisponibiliteDetailComponent } from './pages/disponibilite-detail/dispo
 import { MedecinsDisponiblesComponent } from './pages/medecins-disponibles/medecins-disponibles.component';
 import { DossierMedicalPopUpComponent } from './pages/dossier-medical-pop-up/dossier-medical-pop-up.component';
 import { DossierMedicalDetailsComponent } from './pages/dossier-medical-details/dossier-medical-details.component';
+import { VisiteDetailsDialogComponent } from './pages/visite-details-dialog/visite-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { DossierMedicalDetailsComponent } from './pages/dossier-medical-details/
     MedecinsDisponiblesComponent,
     DossierMedicalPopUpComponent,
     DossierMedicalDetailsComponent,
+    VisiteDetailsDialogComponent,
   ],
   imports: [
     BrowserModule,

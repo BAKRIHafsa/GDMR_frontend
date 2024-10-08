@@ -54,6 +54,10 @@ export class CreneauService {
   getCreneaux(): Observable<Creneau[]> {
     return this.http.get<Creneau[]>(`${this.apiUrl}/collab/affiche`);
   }
+  getAllCreneaux(): Observable<Creneau[]> {
+    return this.http.get<Creneau[]>(`${this.apiUrl}/creneaux/affiche`);
+  }
+
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
