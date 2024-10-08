@@ -7,6 +7,7 @@ import {
   UserProfile,
   ChangePasswordRequest,
 } from '../services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { PasswordChangeDialogComponent } from '../password-change-dialog/password-change-dialog.component';
 import { DossierMedicalPopUpComponent  } from '../dossier-medical-pop-up/dossier-medical-pop-up.component';
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
   showCurrentPassword: boolean = false;
   showNewPassword: boolean = false;
   dossierMedicalExists: boolean = false;
+
 
 
   antecedantForm!: FormGroup; // Formulaire pour les antécédents
@@ -62,15 +64,20 @@ export class ProfileComponent implements OnInit {
   }
 
   private checkDossierMedical(): void {
-    this.antecedantService.getAntecedantForCurrentUser().subscribe(
-      (antecedant) => {
-        this.dossierMedicalExists = !!antecedant;
+    this.antecedantService.getAntecedantForCurrentUser().subscribe({
+      next: (data) => {
+        this.dossierMedicalExists = true; // Disable add button
       },
-      (error) => {
-        console.error('Error fetching medical dossier:', error);
+      error: (error: HttpErrorResponse) => {
+        if (error.status === 404) {
+          this.dossierMedicalExists = false; // Enable add button
+        } else {
+          console.error('Error fetching medical dossier:', error);
+        }
       }
-    );
+    });
   }
+  
 
   private loadUserDetails(): void {
     if (this.userProfile) {

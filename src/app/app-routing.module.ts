@@ -104,15 +104,12 @@ const routes: Routes = [
         component: CalendrierRhVisiteComponent,
       },
       {
-        path: 'creer-creneau', 
-        component: CreneauModalComponent,
-        children: [{
-          path: 'medecins-disponibles', 
-          component: MedecinsDisponiblesComponent,
-        }]
-      },
+        path: 'medecins-disponibles', 
+        component: MedecinsDisponiblesComponent,
+      }
     ],
   },
+  { path: '', redirectTo: 'main', pathMatch: 'full' }, 
   { path: '**', redirectTo: 'login' },
 ];
 

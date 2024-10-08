@@ -39,8 +39,31 @@
       {{ collaborateur.nom }} {{ collaborateur.prenom }}
     </option>
   </select>
-
-  <button type="button" (click)="onSave()">Créer le Créneau</button>
+  <div *ngIf="currentStep === 'medecins'">
+    <mat-progress-spinner *ngIf="isLoading" mode="indeterminate"></mat-progress-spinner>
+    
+    <div *ngIf="!isLoading">
+      <div *ngIf="medecinsDisponibles.length === 0">
+        Aucun médecin disponible pour ce créneau.
+      </div>
+      
+      <mat-list *ngIf="medecinsDisponibles.length > 0">
+        <mat-list-item *ngFor="let medecin of medecinsDisponibles">
+          <mat-radio-button
+            [value]="medecin.idUser"
+            (change)="selectMedecin(medecin.idUser)"
+            [checked]="data.medecinId === medecin.idUser">
+            {{medecin.nom}} {{medecin.prenom}}
+          </mat-radio-button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <mat-dialog-actions align="end">
+  <button type="button" *ngIf="currentStep === 'medecins'"  (click)="onSave()" [disabled]="!data.medecinId">Créer le Créneau</button>
   <button type="button" (click)="onNoClick()">Annuler</button>
-  <button type="button" (click)="goToMedecins()">Suivant</button>
+  <button mat-button *ngIf="currentStep === 'medecins'" (click)="onPrevious()">Précédent</button>
+  <button type="button" *ngIf="currentStep === 'creneau'" (click)="onNext()" [disabled]="!data.date || !data.heureDebutVisite || !data.heureFinVisite">Suivant</button>
+</mat-dialog-actions>
+
 </form>

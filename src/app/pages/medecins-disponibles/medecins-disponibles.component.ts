@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MedecinService } from '../services/medecin.service';
 import { User } from '../models/user.model';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-medecins-disponibles',
@@ -14,23 +16,33 @@ export class MedecinsDisponiblesComponent implements OnInit {
   heureDebut!: string;
   heureFin!: string;
 
-  constructor(private medecinService: MedecinService, private router: Router) {}
+  constructor(private medecinService: MedecinService, private router: Router, private route: ActivatedRoute) {}
 
-  ngOnInit(): void {
-    // Récupérer les paramètres de navigation (date, heureDebut, heureFin)
-    const navigation = this.router.getCurrentNavigation();
-    if (navigation && navigation.extras && navigation.extras.state) {
-      this.date = navigation.extras.state['date'];          // Utilisation de la notation entre crochets
-      this.heureDebut = navigation.extras.state['heureDebut']; // Utilisation de la notation entre crochets
-      this.heureFin = navigation.extras.state['heureFin'];     // Utilisation de la notation entre crochets
+  ngOnInit() {
+    // Récupérer les paramètres de l'URL
+    this.route.queryParams.subscribe(params => {
+      this.date = params['date'] || null;
+      this.heureDebut = params['heureDebut'] || null;
+      this.heureFin = params['heureFin'] || null;
 
-      // Appeler le service pour récupérer les médecins disponibles
-      this.medecinService.MedecinsDisponibles(this.date, this.heureDebut, this.heureFin).subscribe(medecins => {
-        this.medecinsDisponibles = medecins;
-      });
-    }
+      if (this.date && this.heureDebut && this.heureFin) {
+        this.loadMedecinsDisponibles();
+      } else {
+        console.error('Paramètres manquants dans l\'URL');
+        // Gérer le cas où les paramètres sont manquants
+      }
+    });
   }
-
+  
+  loadMedecinsDisponibles() {
+    // Implémenter la logique pour charger les médecins disponibles
+    console.log('Chargement des médecins pour:', {
+      date: this.date,
+      heureDebut: this.heureDebut,
+      heureFin: this.heureFin
+    });
+  }
+  
 
   onSelectMedecin(medecinId: number): void {
     console.log(`Médecin sélectionné: ${medecinId}`);  }

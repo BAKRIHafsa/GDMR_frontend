@@ -24,6 +24,7 @@ export class AntecedantService {
 
   getAntecedantForCurrentUser(): Observable<Antecedant> {
     return this.http.get<Antecedant>(`${this.baseUrl}/obtenir`);
+
   }
 
   createAntecedant(antecedant: Antecedant): Observable<Antecedant> {

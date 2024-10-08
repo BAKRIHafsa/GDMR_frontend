@@ -99,7 +99,7 @@
     <button mat-raised-button color="primary" type="submit">Enregistrer</button>
   </form> -->
   <button mat-button (click)="openDossierMedicalPopUpDialog()" [disabled]="dossierMedicalExists">Ajouter votre dossier médical</button>
-  <button mat-button (click)="openDossierMedicalDetails()">Consulter mon dossier médical</button>
+  <button mat-button (click)="openDossierMedicalDetails()" [disabled]="!dossierMedicalExists">Consulter mon dossier médical</button>
   <div *ngIf="!userProfile">
     <p>Loading profile...</p>
   </div>

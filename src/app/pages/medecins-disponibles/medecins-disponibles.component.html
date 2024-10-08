@@ -1,9 +1,23 @@
-<h2>Médecins Disponibles</h2>
+<div class="medecins-disponibles">
+  <ng-container *ngIf="date && heureDebut && heureFin; else missingParams">
+    <h2>Médecins disponibles</h2>
+    <p>Date : {{ date }}</p>
+    <p>Heure de début : {{ heureDebut }}</p>
+    <p>Heure de fin : {{ heureFin }}</p>
 <ul>
-  <li *ngFor="let medecin of medecinsDisponibles">
+  <li *ngFor="let medecin of medecinsDisponibles" (click)="onSelectMedecin(medecin.idUser)">
     {{ medecin.nom }} {{ medecin.prenom }}
     <button (click)="onSelectMedecin(medecin.idUser)">Sélectionner</button>
   </li>
 </ul>
 
 <button (click)="goBack()">Précédent</button>
+</ng-container>
+  
+<ng-template #missingParams>
+  <div class="error-message">
+    <p>Impossible de charger les médecins disponibles.</p>
+    <p>Certains paramètres sont manquants.</p>
+  </div>
+</ng-template>
+</div>

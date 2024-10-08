@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { User } from '../models/user.model';
 
+
 interface LoginResponse {
   access_token: string;
 }
@@ -78,6 +79,10 @@ export class AuthService {
     );
   }
 
+  getCurrentUserId(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/user/currentUser`);
+  }
+
   getRole(): string | null {
     return this.currentRole;
   }
@@ -98,8 +103,8 @@ export class AuthService {
       );
   }
 
-  getCollaborateurs(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/user/all-collab`);
+  getCollaborateurs(date: string, heureDebut: string, heureFin: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/user/all-collab?date=${date}&heureDebut=${heureDebut}&heureFin=${heureFin}`);
   }
 
   createUser(user: any): Observable<any> {

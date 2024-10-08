@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
 
 export interface Creneau {
   idCréneau: number;
@@ -31,8 +33,9 @@ export interface CreneauCreationRH {
   heureDebutVisite: string;
   heureFinVisite: string;
   typeVisite: string;
-  chargeRh: { idUser: number };
-  collaborateursIds: number[]; // Liste des IDs des collaborateurs concernés
+  chargeRh:  number ;
+  collaborateurId: number; 
+  dateCreation:string;
 }
 @Injectable({
   providedIn: 'root',
@@ -42,10 +45,26 @@ export class CreneauService {
 
   constructor(private http: HttpClient) {}
 
-  creerCreneau(creneau: CreneauCreationRH): Observable<String> {
-    return this.http.post<String>(`${this.apiUrl}/creneaux/creer`, creneau);
+  creerCreneau(creneau: CreneauCreationRH): Observable<any> {
+    return this.http.post(`${this.apiUrl}/creneaux/creer`, creneau, { responseType: 'text' })
+    .pipe(
+      catchError(this.handleError)
+    );
   }
   getCreneaux(): Observable<Creneau[]> {
     return this.http.get<Creneau[]>(`${this.apiUrl}/collab/affiche`);
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side or network error
+      errorMessage = `A client-side error occurred: ${error.error.message}`;
+    } else {
+      // Backend returned an unsuccessful response code
+      errorMessage = `Server returned code: ${error.status}, error message is: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 }

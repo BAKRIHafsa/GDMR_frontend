@@ -14,11 +14,14 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './pages/authentication/auth.interceptor';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
@@ -98,6 +101,9 @@ import { DossierMedicalDetailsComponent } from './pages/dossier-medical-details/
     MatSnackBarModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
     MatButtonModule,
     FullCalendarModule,
     CommonModule,
