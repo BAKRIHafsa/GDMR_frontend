@@ -1,5 +1,7 @@
 <h2>Créer un Créneau</h2>
 <form>
+    <!-- Étape 1: Créneau -->
+  <div *ngIf="currentStep === 'creneau'">
   <label>Date:</label>
   <input type="date" [value]="data.date" disabled />
 
@@ -25,7 +27,10 @@
       {{ option }}
     </option>
   </select>
+</div>$
 
+<!-- Étape 2: Collaborateurs -->
+<div *ngIf="currentStep === 'collaborateurs'">
   <label>Collaborateurs Concernés:</label>
   <select
     [(ngModel)]="data.collaborateurId"
@@ -39,6 +44,9 @@
       {{ collaborateur.nom }} {{ collaborateur.prenom }}
     </option>
   </select>
+</div>
+
+  <!-- Étape 3: Médecins -->
   <div *ngIf="currentStep === 'medecins'">
     <mat-progress-spinner *ngIf="isLoading" mode="indeterminate"></mat-progress-spinner>
     
@@ -60,10 +68,11 @@
     </div>
   </div>
   <mat-dialog-actions align="end">
-  <button type="button" *ngIf="currentStep === 'medecins'"  (click)="onSave()" [disabled]="!data.medecinId">Créer le Créneau</button>
   <button type="button" (click)="onNoClick()">Annuler</button>
-  <button mat-button *ngIf="currentStep === 'medecins'" (click)="onPrevious()">Précédent</button>
-  <button type="button" *ngIf="currentStep === 'creneau'" (click)="onNext()" [disabled]="!data.date || !data.heureDebutVisite || !data.heureFinVisite">Suivant</button>
+  <button mat-button *ngIf="currentStep !== 'creneau'" (click)="onPrevious()">Précédent</button>
+    <button mat-button *ngIf="currentStep === 'creneau'" (click)="onNext()" [disabled]="!data.date || !data.heureDebutVisite || !data.heureFinVisite">Suivant</button>
+    <button mat-button *ngIf="currentStep === 'collaborateurs'" (click)="onNext()" [disabled]="!data.collaborateurId">Suivant</button>
+    <button mat-button *ngIf="currentStep === 'medecins'" (click)="onSave()" [disabled]="!data.medecinId">Créer le Créneau</button>
 </mat-dialog-actions>
 
 </form>

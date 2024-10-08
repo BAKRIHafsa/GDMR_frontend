@@ -48,7 +48,7 @@ export class CalendrierRHComponent implements OnInit {
 
   ngOnInit() {
     this.loadDisponibilites();
-    this.loadCollaborateurs();
+    //this.loadCollaborateurs();
     this.loadCurrentUser();
 
   }
@@ -72,11 +72,22 @@ export class CalendrierRHComponent implements OnInit {
     });
   }
 
-  loadCollaborateurs() {
+  /* loadCollaborateurs() {
     this.authService.getCollaborateurs().subscribe((collaborateurs: User[]) => {
       this.collaborateurs = collaborateurs;
     });
-  } 
+  }  */
+    loadCollaborateurs(date: string, heureDebut: string, heureFin: string): void {
+      this.authService.getCollaborateursAV(date, heureDebut, heureFin).subscribe(
+        (collaborateurs: User[]) => {
+          this.collaborateurs = collaborateurs;
+        },
+        (error) => {
+          console.error('Erreur lors du chargement des collaborateurs:', error);
+        }
+      );
+    }
+    
   handleDateClick(arg: any) {
     const selectedDate = arg.dateStr;
     const heuresDisponibles = this.disponibilites.filter(

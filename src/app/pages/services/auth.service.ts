@@ -102,9 +102,12 @@ export class AuthService {
         })
       );
   }
+  getCollaborateurs(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/user/all-collab`);
+  }
 
-  getCollaborateurs(date: string, heureDebut: string, heureFin: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/user/all-collab?date=${date}&heureDebut=${heureDebut}&heureFin=${heureFin}`);
+  getCollaborateursAV(date: string, heureDebut: string, heureFin: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/user/all-collabAV?date=${date}&heureDebut=${heureDebut}&heureFin=${heureFin}`);
   }
 
   createUser(user: any): Observable<any> {

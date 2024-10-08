@@ -17,7 +17,7 @@ export class CreneauModalComponent implements OnInit {
   currentUser!: User;
   medecinsDisponibles: User[] = []; 
   isLoading = false;
-  currentStep: 'creneau' | 'medecins' = 'creneau';
+  currentStep: 'creneau' | 'collaborateurs' | 'medecins' = 'creneau'; // Ajout de l'étape "collaborateurs"
 
   data: {
     date: string;
@@ -51,7 +51,7 @@ export class CreneauModalComponent implements OnInit {
      private router: Router
   ) {}
 
-  ngOnInit(): void {
+  /* ngOnInit(): void {
     this.loadCurrentUser();
     if (this.inputData) {
       this.data.date = this.inputData.date;
@@ -62,7 +62,26 @@ export class CreneauModalComponent implements OnInit {
       // Charger les collaborateurs en utilisant la date et les heures fournies
       this.loadCollaborateurs(this.data.date, heureDebut, heureFin);
   }
+  } */
+  ngOnInit(): void {
+    this.loadCurrentUser();
+    /* if (this.inputData) {
+      this.data.date = this.inputData.date;
+      const heureDebut = this.inputData.heureDebut || ''; 
+      const heureFin = this.inputData.heureFin || '';
+  
+      if (heureDebut && heureFin) {
+        this.loadCollaborateurs(this.data.date, heureDebut, heureFin);
+      } else {
+        console.error('Heure de début ou heure de fin manquante');
+      }
+    } */
+      if (this.inputData) {
+        this.data.date = this.inputData.date;
+      }
   }
+  
+  
 
   loadCurrentUser(): void {
     this.authService.getCurrentUserId().subscribe(
@@ -84,7 +103,12 @@ export class CreneauModalComponent implements OnInit {
     );
   } */
     loadCollaborateurs(date: string, heureDebut: string, heureFin: string): void {
-      this.authService.getCollaborateurs(date, heureDebut, heureFin).subscribe(
+      if (!heureDebut || !heureFin) {
+        console.error('Heure de début ou heure de fin manquante');
+        return; // Ne faites pas la requête si les valeurs sont vides
+      }
+    
+      this.authService.getCollaborateursAV(date, heureDebut, heureFin).subscribe(
         (data: User[]) => {
           this.collaborateurs = data;
         },
@@ -93,6 +117,8 @@ export class CreneauModalComponent implements OnInit {
         }
       );
     }
+    
+    
     
   loadMedecinsDisponibles(): void {
     this.isLoading = true;
@@ -112,7 +138,7 @@ export class CreneauModalComponent implements OnInit {
     );
   }
 
-  onNext(): void {
+ /*  onNext(): void {
     if (!this.data.date || !this.data.heureDebutVisite || !this.data.heureFinVisite) {
       console.error('Champs obligatoires manquants');
       return;
@@ -120,11 +146,58 @@ export class CreneauModalComponent implements OnInit {
     
     this.currentStep = 'medecins';
     this.loadMedecinsDisponibles();
-  }
+  } */
 
-  onPrevious(): void {
+    /* onNext(): void {
+      if (this.currentStep === 'creneau') {
+        // Passer à l'étape de sélection des collaborateurs
+        if (!this.data.date || !this.data.heureDebutVisite || !this.data.heureFinVisite) {
+          console.error('Champs obligatoires manquants');
+          return;
+        }
+        this.currentStep = 'collaborateurs';  // Passer à l'étape suivante
+      } else if (this.currentStep === 'collaborateurs') {
+        // Passer à l'étape de sélection des médecins
+        if (!this.data.collaborateurId) {
+          console.error('Aucun collaborateur sélectionné');
+          return;
+        }
+        this.currentStep = 'medecins';
+        this.loadMedecinsDisponibles();
+      }
+    } */
+      onNext(): void {
+        if (this.currentStep === 'creneau') {
+          // Vérifiez que les heures de début et de fin sont définies avant de charger les collaborateurs
+          if (!this.data.date || !this.data.heureDebutVisite || !this.data.heureFinVisite) {
+            console.error('Champs obligatoires manquants');
+            return;
+          }
+          // Charger les collaborateurs avec les heures définies
+          this.loadCollaborateurs(this.data.date, this.data.heureDebutVisite, this.data.heureFinVisite);
+          this.currentStep = 'collaborateurs';  // Passer à l'étape suivante
+        } else if (this.currentStep === 'collaborateurs') {
+          // Passer à l'étape de sélection des médecins
+          if (!this.data.collaborateurId) {
+            console.error('Aucun collaborateur sélectionné');
+            return;
+          }
+          this.currentStep = 'medecins';
+          this.loadMedecinsDisponibles();
+        }
+      }
+
+  /* onPrevious(): void {
     this.currentStep = 'creneau';
-  }
+  } */
+
+    onPrevious(): void {
+      if (this.currentStep === 'medecins') {
+        this.currentStep = 'collaborateurs';  // Retour à l'étape précédente
+      } else if (this.currentStep === 'collaborateurs') {
+        this.currentStep = 'creneau';
+      }
+    }
 
   onSave(): void {
     if (this.data.heureDebutVisite && this.data.heureFinVisite) {
@@ -148,8 +221,13 @@ export class CreneauModalComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   selectMedecin(medecinId: number): void {
     this.data.medecinId = medecinId;
+  }
+
+  selectCollaborateur(collaborateurId: number): void {
+    this.data.collaborateurId = collaborateurId;
   }
 
 }
