@@ -2,6 +2,9 @@
 <ul>
   <li *ngFor="let notification of data.notifications" [class.unread]="!notification.lu">
     <span>{{ notification.message }}</span>
-    <button (click)="markAsRead(notification.id)">Mark as read</button>
+    <button *ngIf="!notification.lu" (click)="markAsRead(notification.id)">Mark as read</button>
   </li>
 </ul>
+<div>
+    <button (click)="closeDialog()">Close</button>
+</div>

@@ -23,6 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthInterceptor } from './pages/authentication/auth.interceptor';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
@@ -101,6 +102,7 @@ import { NotificationsDialogComponent } from './pages/notifications-dialog/notif
     MatCheckboxModule,
     MatDialogModule,
     FormsModule,
+    FontAwesomeModule,
     ReactiveFormsModule,
     MatSnackBarModule,
     MatFormFieldModule,

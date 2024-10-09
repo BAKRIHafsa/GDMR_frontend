@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotificationService, Notification } from '../services/notification.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-notifications-dialog',
@@ -12,7 +13,8 @@ export class NotificationsDialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { notifications: Notification[] },
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private dialogRef: MatDialogRef<NotificationsDialogComponent>
   ) {
     // Initialisation du nombre de notifications non lues
     this.unreadCount = this.data.notifications.filter(notification => !notification.lu).length;
@@ -24,9 +26,20 @@ export class NotificationsDialogComponent {
       if (notification) {
         notification.lu = true;
       }
+      this.unreadCount = this.data.notifications.filter(n => !n.lu).length;
       if (this.unreadCount > 0) {
         this.unreadCount--;
       }
+
+      const hasUnreadNotifications = this.data.notifications.some(n => !n.lu);
+
+      // Si toutes les notifications sont lues, rafraîchissez la page
+      if (!hasUnreadNotifications) {
+        window.location.reload();
+      }
     });
+  }
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 }

@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardRHService } from '../services/DashboardRH.service';
 import { DashboardRHDTO } from '../models/DashboardRHDTO.dto';
 import { AuthService } from '../services/auth.service';
+import { NotificationService, Notification } from '../services/notification.service';
+import { MatDialog } from '@angular/material/dialog';
+import { NotificationsDialogComponent } from '../notifications-dialog/notifications-dialog.component';
+
+
 
 @Component({
   selector: 'app-dashboard-rh',
@@ -16,10 +21,15 @@ export class DashboardRHComponent implements OnInit {
   plannedVisitsCollab: number = 0;
   completedVisitsThisWeekCollab: number = 0;
   allVisitsCollab: DashboardRHDTO[] = [];
+  unreadCount: number = 0;
+  notifications: Notification[] = [];
+ 
 
   constructor(
     private dashboardRHService: DashboardRHService,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +47,45 @@ export class DashboardRHComponent implements OnInit {
     this.loadPlannedVisitsForTodayCollab();
     this.loadCompletedVisitsForCurrentWeekCollab();
     this.loadAllVisitsCollab();
+    this.loadUnreadNotificationsCount(); 
+  }
+  loadUnreadNotificationsCount() {
+    this.notificationService.getUnreadNotificationsCount().subscribe(
+      (count) => {
+        this.unreadCount = count;
+        this.loadAllNotifications();
+      },
+      (error) => {
+        console.error('Error fetching unread notifications count', error);
+      }
+    );
+  }
+  /* loadAllNotifications() {
+    this.notificationService.getAllNotifications().subscribe(
+      (notifications) => {
+        this.notifications = notifications;
+      },
+      (error) => {
+        console.error('Error fetching notifications', error);
+      }
+    );
+  } */
+    loadAllNotifications(): void {
+      this.notificationService.getAllNotifications().subscribe(notifications => {
+        this.notifications = notifications;
+        this.unreadCount = this.notifications.filter(notification => !notification.lu).length;
+      });
+    }
+
+  openNotifications(): void {
+    const dialogRef = this.dialog.open(NotificationsDialogComponent, {
+      width: '400px',
+      data: { notifications: this.notifications }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed'); 
+    });
   }
 
   loadPlannedVisitsForToday() {
