@@ -1,0 +1,21 @@
+<div class="container">
+    <h2>Demander une visite spontanée</h2>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Motif</mat-label>
+        <textarea matInput [(ngModel)]="motif" placeholder="Expliquez la raison de la visite..." required></textarea>
+    </mat-form-field>    
+
+    <div class="file-input-container">
+        <label>Documents (optionnels)</label>
+        <input type="file" (change)="onFileSelected($event)" multiple #fileInput style="display:none;">
+        <button mat-stroked-button (click)="fileInput.click()">
+            Choisir des fichiers
+        </button>
+        <span *ngIf="selectedFiles.length > 0">
+            {{selectedFiles.length}} fichier(s) sélectionné(s)
+        </span>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="creerVisiteSpontanee()">Demander</button>
+</div>

@@ -1,17 +1,12 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import { CommonModule } from '@angular/common'
-import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/login/login.component';
-import { LayoutComponent } from './pages/layout/layout.component';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
@@ -22,14 +17,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
-import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthInterceptor } from './pages/authentication/auth.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './pages/login/login.component';
+import { LayoutComponent } from './pages/layout/layout.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MedecinListComponent } from './pages/medecin-list/medecin-list.component';
 import { CollaborateurListComponent } from './pages/collaborateur-list/collaborateur-list.component';
+import { MedecinListComponent } from './pages/medecin-list/medecin-list.component';
 import { ModifierCollaborateurComponent } from './pages/modifier-collaborateur/modifier-collaborateur.component';
 import { ComptesArchivesComponent } from './pages/comptes-archives/comptes-archives.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -57,6 +54,7 @@ import { DossierMedicalPopUpComponent } from './pages/dossier-medical-pop-up/dos
 import { DossierMedicalDetailsComponent } from './pages/dossier-medical-details/dossier-medical-details.component';
 import { VisiteDetailsDialogComponent } from './pages/visite-details-dialog/visite-details-dialog.component';
 import { NotificationsDialogComponent } from './pages/notifications-dialog/notifications-dialog.component';
+import { DemandeVisiteSpontaneeComponent } from './pages/demande-visite-spontanee/demande-visite-spontanee.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +92,7 @@ import { NotificationsDialogComponent } from './pages/notifications-dialog/notif
     DossierMedicalDetailsComponent,
     VisiteDetailsDialogComponent,
     NotificationsDialogComponent,
+    DemandeVisiteSpontaneeComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,7 +116,6 @@ import { NotificationsDialogComponent } from './pages/notifications-dialog/notif
     MatSelectModule,
     BrowserAnimationsModule,
   ],
-  //schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     provideAnimationsAsync(),

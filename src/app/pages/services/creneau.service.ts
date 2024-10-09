@@ -38,6 +38,9 @@ export interface CreneauCreationRH {
   collaborateurId: number; 
   dateCreation:string;
 }
+export interface CreneauRequestDTO {
+  motif: string;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -90,5 +93,9 @@ export class CreneauService {
       responseType: 'json' // Attendez une réponse au format JSON
     });
   }
+  creerVisiteSpontanee(formData: FormData): Observable<Creneau> {
+    return this.http.post<Creneau>(`${this.apiUrl}/collab/creer-visite-spontanee`, formData);
+  }
+
   
 }

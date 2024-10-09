@@ -20,7 +20,7 @@ import { DashboardCollabComponent } from './pages/dashboard-collab/dashboard-col
 import { MedecinDetailsComponent } from './pages/medecin-details/medecin-details.component';
 import { CalendrierRhVisiteComponent } from './pages/calendrier-rh-visite/calendrier-rh-visite.component';
 import { CalendrierCollabComponent } from './pages/calendrier-collab/calendrier-collab.component';
-import { CreneauModalComponent } from './pages/creneau-modal/creneau-modal.component'; 
+import { DemandeVisiteSpontaneeComponent } from './pages/demande-visite-spontanee/demande-visite-spontanee.component';
 import { MedecinsDisponiblesComponent } from './pages/medecins-disponibles/medecins-disponibles.component'; 
 
 const routes: Routes = [
@@ -106,7 +106,11 @@ const routes: Routes = [
       {
         path: 'medecins-disponibles', 
         component: MedecinsDisponiblesComponent,
-      }
+      },
+      {
+        path: 'demande-visite-spontanee', 
+        component: DemandeVisiteSpontaneeComponent,
+      },
     ],
   },
   { path: '', redirectTo: 'main', pathMatch: 'full' }, 
