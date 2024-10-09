@@ -5,6 +5,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarOptions } from '@fullcalendar/core';
 import { MatDialog } from '@angular/material/dialog';
 import { VisitedetailscollabComponent } from '../visitedetailscollab/visitedetailscollab.component';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Ajout pour les notifications
+
 
 @Component({
   selector: 'app-calendrier-collab',
@@ -16,7 +18,8 @@ export class CalendrierCollabComponent implements OnInit {
 
   constructor(
     private creneauService: CreneauService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +64,7 @@ export class CalendrierCollabComponent implements OnInit {
           title: creneau.typeVisite,
           start: `${creneau.date}T${creneau.heureDebutVisite}`,
           end: `${creneau.date}T${creneau.heureFinVisite}`,
+          backgroundColor: creneau.statusVisite === 'EN_ATTENTE_VALIDATION' ? 'red' : '', 
           extendedProps: {
             idCréneau: creneau.idCréneau,
             date: creneau.date,
@@ -101,9 +105,53 @@ export class CalendrierCollabComponent implements OnInit {
     );
   }
   handleEventClick(arg: any): void {
-    this.dialog.open(VisitedetailscollabComponent, {
+    const dialogRef = this.dialog.open(VisitedetailscollabComponent, {
       width: '400px',
       data: arg.event.extendedProps,
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.action === 'valider') {
+        this.validerCreneau(result.creneauId);
+      } else if (result?.action === 'nonValider') {
+        this.nonValiderCreneau(result.creneauId, result.justification);
+      }
+    });
   }
+  validerCreneau(idCreneau: number): void {
+    this.creneauService.validerCreneau(idCreneau).subscribe({
+      next: (response) => {
+        this.snackBar.open(response.message || 'Créneau validé avec succès.', 'Fermer', { duration: 3000 });
+        this.loadCreneaux(); 
+      },
+      error: (err) => {
+        this.snackBar.open(err.error.message || 'Erreur lors de la validation du créneau.', 'Fermer', { duration: 3000 });
+      }
+    });
+  }
+
+  nonValiderCreneau(idCreneau: number, justification: string): void {
+  if (!justification || justification.trim() === '') {
+    this.snackBar.open('La justification est obligatoire pour non-valider le créneau.', 'Fermer', { duration: 3000 });
+    return;
+  }
+
+  this.creneauService.nonValiderCreneau(idCreneau, justification).subscribe({
+    next: () => {
+      this.snackBar.open('Créneau non validé avec succès.', 'Fermer', { duration: 3000 });
+      this.loadCreneaux(); // Recharge la liste des créneaux après la non-validation
+    },
+    error: (err) => {
+      console.log(err);  // Ajoutez ceci pour voir les détails de l'erreur
+      if (err.status === 403) {
+        this.snackBar.open('Vous n\'avez pas l\'autorisation de non-valider ce créneau.', 'Fermer', { duration: 3000 });
+      } else if (err.status === 404) {
+        this.snackBar.open('Créneau introuvable.', 'Fermer', { duration: 3000 });
+      } else {
+        this.snackBar.open(`Erreur lors de la non-validation du créneau: ${err.message}`, 'Fermer', { duration: 3000 });
+      }
+    }
+  });
+}
+
 }

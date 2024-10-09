@@ -4,6 +4,10 @@ import { DashboardRHDTO } from '../models/DashboardRHDTO.dto';
 import { AuthService, UserProfile } from '../services/auth.service';
 import { NotificationService } from '../services/notification.service';
 import { User } from '../models/user.model';
+import { MatDialog } from '@angular/material/dialog';
+import { NotificationsDialogComponent } from '../notifications-dialog/notifications-dialog.component';
+import { Notification } from '../services/notification.service';
+
 
 @Component({
   selector: 'app-dashboard-collab',
@@ -16,11 +20,14 @@ export class DashboardCollabComponent implements OnInit {
   completedVisitsThisWeekCollab: number = 0;
   allVisitsCollab: DashboardRHDTO[] = [];
   unreadCount: number = 0;
+  notifications: Notification[] = [];
+
 
   constructor(
     private dashboardRHService: DashboardRHService,
     private authService: AuthService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +35,7 @@ export class DashboardCollabComponent implements OnInit {
       (profile: User) => {
         this.user = profile;
         if (profile) {
-          this.loadUnreadNotificationsCount(profile.idUser);
+          this.loadUnreadNotificationsCount();
         }
       },
       (error) => {
@@ -39,17 +46,40 @@ export class DashboardCollabComponent implements OnInit {
     this.loadPlannedVisitsForTodayCollab();
     this.loadCompletedVisitsForCurrentWeekCollab();
     this.loadAllVisitsCollab();
+    this.loadUnreadNotificationsCount();
   }
 
-  loadUnreadNotificationsCount(userId: number) {
-    this.notificationService.getUnreadNotificationsCount(userId).subscribe(
+  loadUnreadNotificationsCount() {
+    this.notificationService.getUnreadNotificationsCount().subscribe(
       (count) => {
-        this.unreadCount = count; // Update the unread count
+        this.unreadCount = count;
+        this.loadAllNotifications();
       },
       (error) => {
         console.error('Error fetching unread notifications count', error);
       }
     );
+  }
+  loadAllNotifications() {
+    this.notificationService.getAllNotifications().subscribe(
+      (notifications) => {
+        this.notifications = notifications;
+      },
+      (error) => {
+        console.error('Error fetching notifications', error);
+      }
+    );
+  }
+
+  openNotifications(): void {
+    const dialogRef = this.dialog.open(NotificationsDialogComponent, {
+      width: '400px',
+      data: { notifications: this.notifications }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   loadPlannedVisitsForTodayCollab() {
@@ -72,14 +102,6 @@ export class DashboardCollabComponent implements OnInit {
       (error) => console.error(error)
     );
   }
-
-  markNotificationsAsRead(notificationId: number): void {
-    this.notificationService.markAsRead(notificationId).subscribe(() => {
-      this.unreadCount--;
-    });
-  }
-  openNotifications(): void {
-    console.log('Afficher les notifications...');
-  }
+  
   
 }

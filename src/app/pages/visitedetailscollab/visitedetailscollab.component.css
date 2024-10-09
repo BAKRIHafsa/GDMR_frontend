@@ -1,57 +1,58 @@
 .modal-header {
-  background-color: #007bff;
+  background-color: #3f51b5; /* Modification de la couleur de fond */
   color: white;
-  padding: 1rem;
-  border-bottom: 1px solid #ddd;
+  padding: 1.2rem; /* Ajustement du padding */
+  border-bottom: 1px solid #ccc; /* Changement de la bordure */
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .modal-title {
-  font-size: 1.5rem;
+  font-size: 1.6rem; /* Augmentation de la taille de la police */
   margin: 0;
+  font-weight: 500; /* Ajout de gras pour le titre */
 }
 
 .close-button {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.8rem; /* Augmentation de la taille pour plus de visibilité */
   color: white;
   cursor: pointer;
 }
 
 .modal-body {
-  padding: 1rem;
-  max-height: 70vh;
+  padding: 1.5rem; /* Augmentation du padding */
+  max-height: 65vh; /* Réduction de la hauteur pour plus d'espace */
   overflow-y: auto;
 }
 
 .modal-body h5 {
   margin-top: 1rem;
-  color: #333;
-  font-size: 1.2rem;
+  color: #3f51b5; /* Harmonisation des couleurs */
+  font-size: 1.3rem; /* Ajustement de la taille */
   font-weight: bold;
 }
 
 .modal-body p {
-  margin: 0.5rem 0;
-  font-size: 1rem;
-  color: #555;
+  margin: 0.6rem 0;
+  font-size: 1.1rem; /* Augmentation de la taille de la police pour plus de lisibilité */
+  color: #444; /* Changement de couleur pour un texte moins sombre */
 }
 
 .modal-footer {
-  padding: 1rem;
+  padding: 1.2rem; /* Ajustement du padding */
   border-top: 1px solid #ddd;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between; /* Espacement uniforme des boutons */
 }
 
 .modal-footer button {
-  background-color: #007bff;
+  background-color: #4caf50; /* Changement de la couleur des boutons en vert */
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem; /* Ajustement du padding pour des boutons plus grands */
   font-size: 1rem;
   cursor: pointer;
   border-radius: 0.25rem;
@@ -59,7 +60,7 @@
 }
 
 .modal-footer button:hover {
-  background-color: #0056b3;
+  background-color: #388e3c; /* Couleur verte plus foncée au hover */
 }
 
 @media (max-width: 768px) {
@@ -70,6 +71,6 @@
   }
 
   .modal-body {
-    max-height: 60vh;
+    max-height: 55vh; /* Réduction pour petits écrans */
   }
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
 
 
 export interface Creneau {
@@ -71,4 +72,23 @@ export class CreneauService {
     console.error(errorMessage);
     return throwError(errorMessage);
   }
+
+  validerCreneau(id: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/collab/${id}/valider`, {} ,{headers: new HttpHeaders ({
+      'content-type':'application/json'
+    }),
+      responseType:'json'
+   }); // API correcte pour la validation
+  }
+  
+  // Méthode pour non-valider un créneau
+  nonValiderCreneau(id: number, justification: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/collab/${id}/non-valider`, { justification }, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      responseType: 'json' // Attendez une réponse au format JSON
+    });
+  }
+  
 }
