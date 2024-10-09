@@ -22,6 +22,10 @@ export class DemandeVisiteSpontaneeComponent {
         this.selectedFiles = Array.from(input.files);
     }
 }
+
+removeFile(index: number) {
+  this.selectedFiles.splice(index, 1);
+}
   // Méthode pour créer une visite spontanée
   /* creerVisiteSpontanee() {
     if (!this.motif) {

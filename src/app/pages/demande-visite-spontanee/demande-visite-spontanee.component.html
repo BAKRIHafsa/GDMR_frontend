@@ -17,5 +17,15 @@
         </span>
     </div>
 
+    <div *ngIf="selectedFiles.length > 0">
+        <h4>Fichiers sélectionnés :</h4>
+        <ul>
+            <li *ngFor="let file of selectedFiles; let i = index">
+                {{file.name}} 
+                <button mat-button color="warn" (click)="removeFile(i)">Supprimer</button>
+            </li>
+        </ul>
+    </div>
+
     <button mat-raised-button color="primary" (click)="creerVisiteSpontanee()">Demander</button>
 </div>
