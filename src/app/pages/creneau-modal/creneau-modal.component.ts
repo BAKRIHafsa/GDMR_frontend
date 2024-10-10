@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { MedecinService } from '../services/medecin.service';
+import { CreneauService, CreneauCreationRH } from '../services/creneau.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class CreneauModalComponent implements OnInit {
   currentUser!: User;
   medecinsDisponibles: User[] = []; 
   isLoading = false;
-  currentStep: 'creneau' | 'collaborateurs' | 'medecins' = 'creneau'; // Ajout de l'étape "collaborateurs"
+  currentStep: 'creneau' | 'collaborateurs' | 'medecins' = 'creneau';
 
   data: {
     date: string;
@@ -46,6 +47,7 @@ export class CreneauModalComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private medecinService: MedecinService,
+    private creneauService: CreneauService,
     public dialogRef: MatDialogRef<CreneauModalComponent>, // Injection de MatDialogRef
     @Inject(MAT_DIALOG_DATA) public inputData: any, // Injection des données de la boîte de dialogue
      private router: Router
@@ -199,7 +201,7 @@ export class CreneauModalComponent implements OnInit {
       }
     }
 
-  onSave(): void {
+   onSave(): void {
     if (this.data.heureDebutVisite && this.data.heureFinVisite) {
       this.data.heureDebutVisite = this.formatTime(this.data.heureDebutVisite);
       this.data.heureFinVisite = this.formatTime(this.data.heureFinVisite);
@@ -211,8 +213,49 @@ export class CreneauModalComponent implements OnInit {
     } else {
       console.error('Certaines données sont manquantes.');
     }
-  }
-    
+  } 
+
+
+     /* onSave(): void {
+      if (!this.isDataValid() || !this.currentUser) {
+        return;
+      }
+  
+      const creneauData: CreneauCreationRH = {
+        ...this.data,
+        heureDebutVisite: this.formatTime(this.data.heureDebutVisite),
+        heureFinVisite: this.formatTime(this.data.heureFinVisite),
+        chargeRh: this.currentUser.idUser, // Utilisation de l'ID au lieu de l'objet User complet
+        dateCreation: new Date().toISOString().split('T')[0],
+        collaborateurId: this.data.collaborateurId!,
+      };
+  
+      if (this.data.typeVisite === 'VISITE_SPONTANEE') {
+        this.creneauService.mettreAJourCreneauVisiteSpontanee(
+          this.data.collaborateurId!,
+          creneauData
+        ).subscribe(
+          () => this.dialogRef.close(true),
+          error => console.error('Erreur lors de la mise à jour du créneau:', error)
+        );
+      } else {
+        this.creneauService.creerCreneau(creneauData).subscribe(
+          () => this.dialogRef.close(true),
+          error => console.error('Erreur lors de la création du créneau:', error)
+        );
+      }
+    }
+    isDataValid(): boolean {
+      return !!(
+        this.data.date &&
+        this.data.heureDebutVisite &&
+        this.data.heureFinVisite &&
+        this.data.typeVisite &&
+        this.data.collaborateurId &&
+        this.data.medecinId &&
+        this.currentUser
+      );
+    }  */
   formatTime(time: string): string {
     return time + ":00.000000";
   }

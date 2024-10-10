@@ -62,7 +62,18 @@ export class CreneauService {
     return this.http.get<Creneau[]>(`${this.apiUrl}/creneaux/affiche`);
   }
 
+  mettreAJourCreneauVisiteSpontanee(collaborateurId: number, creneauCreationDTO: CreneauCreationRH): Observable<void> {
+    const url = `${this.apiUrl}/creneaux/visites-spontanees/${collaborateurId}`;
+    return this.http.put<void>(url, creneauCreationDTO, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
 
+  modifierStatutCreneau(idCreneau: number, nouveauStatut: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/creneaux/${idCreneau}/statut`, { statut: nouveauStatut });
+  }
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {

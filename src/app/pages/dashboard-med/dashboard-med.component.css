@@ -11,6 +11,27 @@
   flex: 1;
   padding-left: 20px; /* Ajout d'un rembourrage à gauche */
 }
+.notification-icon {
+  position: relative;
+  font-size: 24px;
+  color: grey;
+  cursor: pointer;
+}
+
+.notification-icon.has-unread {
+  color: red; /* Change la couleur si unreadCount > 0 */
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
 
 .stats-container {
   display: flex;
