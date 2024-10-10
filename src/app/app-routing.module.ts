@@ -22,6 +22,7 @@ import { CalendrierRhVisiteComponent } from './pages/calendrier-rh-visite/calend
 import { CalendrierCollabComponent } from './pages/calendrier-collab/calendrier-collab.component';
 import { DemandeVisiteSpontaneeComponent } from './pages/demande-visite-spontanee/demande-visite-spontanee.component';
 import { MedecinsDisponiblesComponent } from './pages/medecins-disponibles/medecins-disponibles.component'; 
+import { VisitesMedCalendrierComponent } from './pages/visites-med-calendrier/visites-med-calendrier.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -110,6 +111,10 @@ const routes: Routes = [
       {
         path: 'demande-visite-spontanee', 
         component: DemandeVisiteSpontaneeComponent,
+      },
+      {
+        path: 'visites-med-calendrier', 
+        component: VisitesMedCalendrierComponent,
       },
     ],
   },

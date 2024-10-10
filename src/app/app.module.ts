@@ -55,6 +55,8 @@ import { DossierMedicalDetailsComponent } from './pages/dossier-medical-details/
 import { VisiteDetailsDialogComponent } from './pages/visite-details-dialog/visite-details-dialog.component';
 import { NotificationsDialogComponent } from './pages/notifications-dialog/notifications-dialog.component';
 import { DemandeVisiteSpontaneeComponent } from './pages/demande-visite-spontanee/demande-visite-spontanee.component';
+import { VisitesMedCalendrierComponent } from './pages/visites-med-calendrier/visites-med-calendrier.component';
+import { VisiteMedDetailsDialogComponent } from './pages/visite-med-details-dialog/visite-med-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,8 @@ import { DemandeVisiteSpontaneeComponent } from './pages/demande-visite-spontane
     VisiteDetailsDialogComponent,
     NotificationsDialogComponent,
     DemandeVisiteSpontaneeComponent,
+    VisitesMedCalendrierComponent,
+    VisiteMedDetailsDialogComponent,
   ],
   imports: [
     BrowserModule,

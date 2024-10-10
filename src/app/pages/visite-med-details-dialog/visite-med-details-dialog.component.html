@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Détails de la visite</h1>
+<div mat-dialog-content>
+  <p><strong>Type de visite:</strong> {{ data.typeVisite }}</p>
+  <p><strong>Date:</strong> {{ data.date }}</p>
+  <p><strong>Heure de début:</strong> {{ data.heureDebut }}</p>
+  <p><strong>Heure de fin:</strong> {{ data.heureFin }}</p>
+  <p *ngIf="data.motif"><strong>Motif:</strong> {{ data.motif }}</p>
+  <p *ngIf="data.document"><strong>Document:</strong> {{ data.document }}</p>
+  <p><strong>Statut:</strong> {{ data.statut }}</p>
+  <p><strong>Collaborateur:</strong> {{ data.collaborateur?.prenom }} {{ data.collaborateur?.nom }}</p>
+</div>
+
+<h3>Documents envoyés par le collaborateur:</h3>
+<ul *ngIf="data.documents?.length > 0; else noDocs">
+  <li *ngFor="let document of data.documents">
+    <!-- Remplacer le lien par un bouton de téléchargement -->
+    <button (click)="downloadFile(document.cheminFichier)">{{ document.nomFichier }}</button>
+  </li>
+</ul>
+
+<ng-template #noDocs>
+  <p>Aucun document n'a été envoyé.</p>
+</ng-template>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Fermer</button>
+</div>

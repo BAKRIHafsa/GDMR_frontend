@@ -5,6 +5,26 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { map } from 'rxjs/operators';
 
+export interface Creneau {
+  id: number;
+  typeVisite: string;
+  date: string;
+  heureDebutVisite: string;
+  heureFinVisite: string;
+  motif: string;
+  statusVisite: string;
+  collaborateur: {
+    nom: string;
+    prenom: string;
+  };
+  documents: Document[];
+}
+
+export interface Document {
+  id: number;
+  nomFichier: string;
+  cheminFichier: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -68,10 +88,11 @@ export class MedecinService {
     return this.http.get<User[]>(`${this.MmapiUrl}/disponibles?date=${date}&heureDebut=${heureDebut}&heureFin=${heureFin}`);
   }
 
- /*  activerMedecin(id: number, options: { responseType: 'text' }) {
-    return this.http.put(`${this.AapiUrl}/activer/${id}`, null, options);
-  } */
     activerMedecin(id: number): Observable<any> {
       return this.http.put(`${this.AapiUrl}/activer/${id}`, {});
+    }
+
+    getCreneauxForMedecin(): Observable<Creneau[]> {
+      return this.http.get<Creneau[]>(`${this.MmapiUrl}/creneaux`);
     }
 }
