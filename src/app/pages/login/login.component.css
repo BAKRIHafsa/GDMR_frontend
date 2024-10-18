@@ -8,15 +8,19 @@
 }
  
 
-.parent{
+.parent {
     background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    background-image: url('/assets/images/SQLI_Rabat.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     height: 100vh;
 }
+
 
 .container{
     background-color: #fff;
@@ -28,6 +32,11 @@
     max-width: 100%;
     min-height: 480px;
 }
+.logo {
+    width: 150px; /* Ajustez la largeur selon vos besoins */
+    margin: 20px 0; /* Ajoutez un peu d'espace au-dessus et en dessous */
+}
+
 
 .container p{
     font-size: 14px;
@@ -48,7 +57,7 @@
 }
 
 .container button{
-    background-color: #512da8;
+    background-color: #121ba0;
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -169,9 +178,9 @@
 }
 
 .toggle{
-    background-color: #512da8;
+    background-color: #121ba0;
     height: 100%;
-    background: linear-gradient(to right, #5c6bc0, #512da8);
+    background: linear-gradient(to right, #6c7ddd, #121ba0);
     color: #fff;
     position: relative;
     left: -100%;

@@ -57,6 +57,7 @@ import { NotificationsDialogComponent } from './pages/notifications-dialog/notif
 import { DemandeVisiteSpontaneeComponent } from './pages/demande-visite-spontanee/demande-visite-spontanee.component';
 import { VisitesMedCalendrierComponent } from './pages/visites-med-calendrier/visites-med-calendrier.component';
 import { VisiteMedDetailsDialogComponent } from './pages/visite-med-details-dialog/visite-med-details-dialog.component';
+import { ChangePasswordFirstComponent } from './pages/change-password-first/change-password-first.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { VisiteMedDetailsDialogComponent } from './pages/visite-med-details-dial
     DemandeVisiteSpontaneeComponent,
     VisitesMedCalendrierComponent,
     VisiteMedDetailsDialogComponent,
+    ChangePasswordFirstComponent,
   ],
   imports: [
     BrowserModule,

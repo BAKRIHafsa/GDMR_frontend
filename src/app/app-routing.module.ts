@@ -23,6 +23,7 @@ import { CalendrierCollabComponent } from './pages/calendrier-collab/calendrier-
 import { DemandeVisiteSpontaneeComponent } from './pages/demande-visite-spontanee/demande-visite-spontanee.component';
 import { MedecinsDisponiblesComponent } from './pages/medecins-disponibles/medecins-disponibles.component'; 
 import { VisitesMedCalendrierComponent } from './pages/visites-med-calendrier/visites-med-calendrier.component';
+import { ChangePasswordFirstComponent } from './pages/change-password-first/change-password-first.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -116,6 +117,11 @@ const routes: Routes = [
         path: 'visites-med-calendrier', 
         component: VisitesMedCalendrierComponent,
       },
+      {
+        path: 'change-password-first',
+        component: ChangePasswordFirstComponent,
+      },
+      
     ],
   },
   { path: '', redirectTo: 'main', pathMatch: 'full' }, 

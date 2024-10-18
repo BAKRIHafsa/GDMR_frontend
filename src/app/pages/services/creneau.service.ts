@@ -38,6 +38,15 @@ export interface CreneauCreationRH {
   collaborateurId: number; 
   dateCreation:string;
 }
+
+export interface ModifierCreneauDTO{
+  date: string;
+  heureDebutVisite: string;
+  statusVisite: string;
+  heureFinVisite: string;
+  medecinId?: number; 
+
+}
 export interface CreneauRequestDTO {
   motif: string;
 }
@@ -74,6 +83,11 @@ export class CreneauService {
   modifierStatutCreneau(idCreneau: number, nouveauStatut: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/creneaux/${idCreneau}/statut`, { statut: nouveauStatut });
   }
+
+  modifierVisiteNonValide(idCreneau: number, modifDetails: ModifierCreneauDTO): Observable<any> {
+    return this.http.put(`${this.apiUrl}/creneaux/${idCreneau}/modification-visite`, modifDetails);
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {

@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class NotificationsDialogComponent {
   unreadCount: number = 0;
+  
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { notifications: Notification[] },
@@ -19,6 +20,7 @@ export class NotificationsDialogComponent {
     // Initialisation du nombre de notifications non lues
     this.unreadCount = this.data.notifications.filter(notification => !notification.lu).length;
   }
+  
 
   markAsRead(notificationId: number): void {
     this.notificationService.markAsRead(notificationId).subscribe(() => {
@@ -39,6 +41,15 @@ export class NotificationsDialogComponent {
       }
     });
   }
+
+  markAllAsRead(): void {
+    this.notificationService.markAllAsRead().subscribe(() => {
+      this.data.notifications.forEach(notification => notification.lu = true);
+      this.unreadCount = 0; // Met à jour le nombre de notifications non lues
+    });
+  }
+  
+
   closeDialog(): void {
     this.dialogRef.close();
   }

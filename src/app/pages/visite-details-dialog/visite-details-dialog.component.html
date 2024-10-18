@@ -1,17 +1,82 @@
 <h1 mat-dialog-title>Détails de la visite</h1>
 <div mat-dialog-content>
   <p><strong>Type de visite:</strong> {{ data.typeVisite }}</p>
-  <p><strong>Date:</strong> {{ data.date | date: 'longDate' }}</p>
-  <p><strong>Heure de début:</strong> {{ data.heureDebutVisite | date: 'shortTime' }}</p>
-  <p><strong>Heure de fin:</strong> {{ data.heureFinVisite | date: 'shortTime' }}</p>
-  <p><strong>Motif:</strong> {{ data.motif || 'Non défini' }}</p>
-  <p><strong>Statut:</strong> {{ data.statusVisite }}</p>
-  <p><strong>Collaborateur:</strong> {{ data.collaborateur?.nom || 'Non défini' }}</p>
-  <p><strong>Médecin:</strong> {{ data.medecin?.nom || 'Non défini' }}</p>
-  <p><strong>Justification non validée:</strong> {{ data.justifNonValide }}</p>
-  <p><strong>Justification annulation (médecin):</strong> {{ data.justifAnnuleMedecin }}</p>
-  <p><strong>Justification annulation (collaborateur):</strong> {{ data.justifAnnuleCollaborateur }}</p>
+  
+  <form>
+    <!-- Affichage des champs d'édition si le statut est NON_VALIDE -->
+    <div *ngIf="data.statusVisite === 'NON_VALIDE'; else readOnlyFields">
+      <mat-form-field appearance="fill">
+        <mat-label>Date</mat-label>
+        <input
+          matInput
+          [(ngModel)]="data.date"
+          name="date"
+          type="date" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Heure de début</mat-label>
+        <input
+          matInput
+          [(ngModel)]="data.heureDebutVisite"
+          name="heureDebut"
+          type="time" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Heure de fin</mat-label>
+        <input
+          matInput
+          [(ngModel)]="data.heureFinVisite"
+          name="heureFin"
+          type="time" />
+      </mat-form-field>
+
+      <button mat-button 
+        (click)="confirmerModification()" 
+        style="display: block;">
+        Suivant
+      </button>
+    </div>
+
+    <!-- Affichage des champs en lecture seule si le statut n'est pas NON_VALIDE -->
+    <ng-template #readOnlyFields>
+      <p><strong>Date:</strong> {{ data.date | date }}</p>
+      <p><strong>Heure de début:</strong> {{ data.heureDebutVisite | date:'shortTime' }}</p>
+      <p><strong>Heure de fin:</strong> {{ data.heureFinVisite | date:'shortTime' }}</p>
+    </ng-template>
+
+    <!-- Logique d'affichage des médecins -->
+    <div *ngIf="showMedecins">
+      <mat-progress-spinner *ngIf="isLoading" mode="indeterminate"></mat-progress-spinner>
+      
+      <div *ngIf="!isLoading">
+        <div *ngIf="medecinsDisponibles.length === 0">
+          Aucun médecin disponible pour ce créneau.
+        </div>
+        
+        <mat-list *ngIf="medecinsDisponibles.length > 0">
+          <mat-list-item *ngFor="let medecin of medecinsDisponibles">
+            <mat-radio-button
+              [value]="medecin.idUser"
+              (change)="selectMedecin(medecin.idUser)"
+              [checked]="data.medecinId === medecin.idUser">
+              {{medecin.nom}} {{medecin.prenom}}
+            </mat-radio-button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+
+    <p><strong>Motif:</strong> {{ data.motif || 'Non défini' }}</p>
+    <p><strong>Statut:</strong> {{ data.statusVisite }}</p>
+    <p><strong>Collaborateur:</strong> {{ data.collaborateur?.nom || 'Non défini' }}</p>
+    <p><strong>Justification non validée:</strong> {{ data.justifNonValide }}</p>
+    <p><strong>Justification annulation (médecin):</strong> {{ data.justifAnnuleMedecin }}</p>
+    <p><strong>Justification annulation (collaborateur):</strong> {{ data.justifAnnuleCollaborateur }}</p>
+  </form>
 </div>
+
 <div mat-dialog-actions>
   <button mat-button (click)="onModifierStatut()">Modifier</button>
   <button mat-button mat-dialog-close>Fermer</button>

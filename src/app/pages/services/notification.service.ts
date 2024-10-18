@@ -32,4 +32,9 @@ export class NotificationService {
       notificationId
     });
   }
+
+  markAllAsRead(): Observable<any> {
+    return this.http.put(`${this.baseUrl}/markAllAsRead`, {});
+  }
+  
 }

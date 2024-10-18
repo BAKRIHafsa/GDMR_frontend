@@ -1,3 +1,11 @@
-.unread .bold-text {
-  font-weight: bold;
+.notifications-container {
+  max-height: 400px; /* Ajustez la hauteur selon vos besoins */
+  overflow-y: auto; /* Permet le défilement vertical */
+  padding: 10px;
+  border: 1px solid #ccc; /* Ajoutez une bordure pour le style */
+  border-radius: 4px; /* Coins arrondis pour le conteneur */
+}
+
+.unread {
+  font-weight: bold; /* Met en évidence les notifications non lues */
 }

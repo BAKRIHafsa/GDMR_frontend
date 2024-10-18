@@ -1,38 +1,29 @@
 <div class="parent">
   <div class="container" id="container">
+    <img src="/assets/images/SQLI_LOGO.png" alt="Logo SQLI" class="logo" /> <!-- Ajout du logo ici -->
     <div class="form-container sign-in">
       <form (ngSubmit)="onLogin()">
-        <h1>Sign In</h1>
-        <div class="social-icons">
-          <a href="#" class="icon"
-            ><i class="fa-brands fa-google-plus-g"></i
-          ></a>
-          <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-          <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
-        </div>
-        <span>or use your email password</span>
+        <h1>Se connecter</h1>
         <input
-          type="usermane"
+          type="username"  
           name="username"
           [(ngModel)]="loginObj.username"
-          placeholder="Username"
+          placeholder="Nom d'utilisateur"
         />
         <input
           type="password"
           name="password"
           [(ngModel)]="loginObj.password"
-          placeholder="Password"
+          placeholder="Mot de passe"
         />
-        <a href="#">→ Forget Your Password? ←</a>
-        <button type="submit">Sign In</button>
+        <button type="submit">Se connecter</button>
       </form>
     </div>
     <div class="toggle-container">
       <div class="toggle">
         <div class="toggle-panel toggle-right">
-          <h1>Hello, Friend!</h1>
-          <p>Enter your personal details to use all of site features</p>
+          <h1>Bonjour!</h1>
+          <p>Entrez vos informations personnelles pour utiliser toutes les fonctionnalités du site</p>
         </div>
       </div>
     </div>
