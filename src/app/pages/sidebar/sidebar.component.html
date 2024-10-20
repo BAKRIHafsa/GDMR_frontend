@@ -55,6 +55,14 @@
         </a>
       </li>
       <li *ngIf="userProfile?.role === 'ADMINISTRATEUR'" class="menu-item">
+        <a routerLink="/main/calendrier-collab" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-calendar-fill"></i>
+          </span>
+          <span class="menu-title">Calendrier</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'ADMINISTRATEUR'" class="menu-item">
         <a (click)="logout()">
           <span class="menu-icon">
             <i class="ri-logout-box-fill"></i>

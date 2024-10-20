@@ -32,7 +32,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   changePasswordFirst(request: { password: string }): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/user/change-password`, request);
+    return this.http.post<void>(`${this.apiUrl}/user/change-password-premier-fois`, request);
   }
 
   login(username: string, password: string): Observable<LoginResponse> {

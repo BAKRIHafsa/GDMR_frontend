@@ -3,7 +3,15 @@
   <div class="content">
     <div class="dashboard">
       <h1 class="title">Dashboard</h1>
-      <div *ngIf="userProfile?.role === 'ADMINISTRATEUR'">
+      <div class="notification-icon-container">
+        <button (click)="openNotifications()" class="notification-icon" [ngClass]="{'has-unread': unreadCount > 0}">
+          <span class="material-icons">
+            notifications
+          </span>
+          <span class="badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+        </button>
+      </div>
+      <div *ngIf="user?.role === 'ADMINISTRATEUR'">
         <div class="stats-container">
           <div class="stat-box">
             <h3 class="number">Visites Planifiées pour Aujourd'hui</h3>

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 *{
     margin: 0;
@@ -6,7 +5,18 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
- 
+.logo-image {
+    width: 100px; /* Réduire de 150px à 80px ou la taille souhaitée */
+    height: auto;
+    display: block;
+    margin: 0 auto 20px;
+}
+.form-container form img {
+    width: 100px; /* ou la taille que vous souhaitez */
+    height: auto;
+    display: block;
+    margin: 0 auto 20px;
+}
 
 .parent {
     background-color: #c9d6ff;
@@ -36,7 +46,9 @@
     width: 150px; /* Ajustez la largeur selon vos besoins */
     margin: 20px 0; /* Ajoutez un peu d'espace au-dessus et en dessous */
 }
-
+h1{
+    font-weight: bold;
+}
 
 .container p{
     font-size: 14px;
