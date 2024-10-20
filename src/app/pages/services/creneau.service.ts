@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 
 
 export interface Creneau {
-  idCréneau: number;
+  idCréneau: number;  // Ajoutez cette ligne
   date: string;
   heureDebutVisite: string;
   heureFinVisite: string;
@@ -122,5 +122,10 @@ export class CreneauService {
     return this.http.post<Creneau>(`${this.apiUrl}/collab/creer-visite-spontanee`, formData);
   }
 
+  annulerCreneau(idCreneau: number, motifAnnulation: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/collab/annuler/${idCreneau}`, motifAnnulation, { responseType: 'text' });
+}
+
+  
   
 }

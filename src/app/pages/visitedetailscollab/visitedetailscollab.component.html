@@ -8,16 +8,38 @@
   <p *ngIf="data.motif"><strong>Motif:</strong> {{ data.motif }}</p>
   <p *ngIf="data.medecin"><strong>Médecin:</strong> {{ data.medecin.nom }} {{ data.medecin.prenom }}</p>
   <p *ngIf="data.collaborateur"><strong>Collaborateur:</strong> {{ data.collaborateur.nom }} {{ data.collaborateur.prenom }}</p>
-  <mat-form-field *ngIf="showJustificationField">
-    <mat-label>Justification pour non-validation</mat-label>
-    <input matInput [(ngModel)]="justification" placeholder="Entrez une justification">
-  </mat-form-field>
+
+  <!-- Champ de justification pour non-validation -->
+  <div *ngIf="showJustificationField">
+    <label for="justification">Justification pour non-validation:</label>
+    <input id="justification" type="text" [(ngModel)]="justification" placeholder="Entrez une justification" style="width: 100%;">
+  </div>
+
+  <!-- Champ pour motif d'annulation si la visite est planifiée -->
+  <div *ngIf="data.statusVisite === 'PLANIFIE'">
+    <h3>Annuler la visite</h3>
+    <label for="motifAnnulation">Motif d'annulation:</label>
+    <input id="motifAnnulation" type="text" [(ngModel)]="motifAnnulation" placeholder="Entrez un motif d'annulation" style="width: 100%;">
+  </div>
 </div>
+
 <div mat-dialog-actions>
   <button mat-button (click)="onClose()">Fermer</button>
   <div *ngIf="data.statusVisite === 'EN_ATTENTE_VALIDATION'">
     <button mat-button color="primary" (click)="valider()">Valider</button>
     <button mat-button color="warn" (click)="nonValider()">Non Valider</button>
-    <button mat-button color="warn" (click)="submitNonValidation()">Confirmer Non Validation</button> <!-- Bouton pour confirmer la non-validation -->
+  </div>
+  
+  <!-- Afficher le bouton d'annulation si la visite est planifiée -->
+  <div *ngIf="data.statusVisite === 'PLANIFIE'">
+    <button mat-button color="warn" (click)="annuler()">Annuler la visite</button>
+  </div>
+
+  <!-- Afficher le bouton de confirmation pour la non-validation ou l'annulation -->
+  <div *ngIf="showJustificationField">
+    <button mat-button color="warn" (click)="submitNonValidation()">Confirmer Non Validation</button>
+  </div>
+  <div *ngIf="showAnnulationField">
+    <button mat-button color="warn" (click)="submitAnnulation()">Confirmer Annulation</button>
   </div>
 </div>

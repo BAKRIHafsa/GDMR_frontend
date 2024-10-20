@@ -115,6 +115,8 @@ export class CalendrierCollabComponent implements OnInit {
         this.validerCreneau(result.creneauId);
       } else if (result?.action === 'nonValider') {
         this.nonValiderCreneau(result.creneauId, result.justification);
+      }else if (result?.action === 'annuler') {
+        this.annulerCreneau(result.creneauId, result.motifAnnulation);
       }
     });
   }
@@ -150,6 +152,18 @@ export class CalendrierCollabComponent implements OnInit {
       } else {
         this.snackBar.open(`Erreur lors de la non-validation du créneau: ${err.message}`, 'Fermer', { duration: 3000 });
       }
+    }
+  });
+}
+
+annulerCreneau(idCreneau: number, motifAnnulation: string): void {
+  this.creneauService.annulerCreneau(idCreneau, motifAnnulation).subscribe({
+    next: (response) => {
+      this.snackBar.open(response.message || 'Créneau annulé avec succès.', 'Fermer', { duration: 3000 });
+      this.loadCreneaux(); 
+    },
+    error: (err) => {
+      this.snackBar.open(err.error.message || 'Erreur lors de l\'annulation du créneau.', 'Fermer', { duration: 3000 });
     }
   });
 }

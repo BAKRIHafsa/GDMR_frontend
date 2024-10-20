@@ -6,7 +6,7 @@ import { User } from '../models/user.model';
 import { map } from 'rxjs/operators';
 
 export interface Creneau {
-  id: number;
+  idCréneau: number;
   typeVisite: string;
   date: string;
   heureDebutVisite: string;

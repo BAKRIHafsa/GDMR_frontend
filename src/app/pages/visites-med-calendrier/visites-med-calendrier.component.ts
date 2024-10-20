@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MedecinService } from '../services/medecin.service';
+import { CreneauService, Creneau } from '../services/creneau.service';
 import { CalendarOptions } from '@fullcalendar/core';  // Import depuis @fullcalendar/core
 import dayGridPlugin from '@fullcalendar/daygrid';     // Import du plugin dayGrid
 import interactionPlugin from '@fullcalendar/interaction';
@@ -19,7 +20,7 @@ export class VisitesMedCalendrierComponent {
     eventClick: this.handleEventClick.bind(this)  // Gérer le clic sur un événement
   };
 
-  constructor(private medecinService: MedecinService, private dialog: MatDialog) {}
+  constructor(private medecinService: MedecinService, private dialog: MatDialog, private creneauService: CreneauService) {}
 
   ngOnInit(): void {
     // Récupérer les créneaux (visites) du médecin connecté
@@ -28,6 +29,7 @@ export class VisitesMedCalendrierComponent {
         title: `${creneau.typeVisite}`,
         start: `${creneau.date}T${creneau.heureDebutVisite}`,
         end: `${creneau.date}T${creneau.heureFinVisite}`,
+        classNames: creneau.statusVisite === 'ANNULE' ? 'event-annule' : '',
         extendedProps: {
           typeVisite: creneau.typeVisite,
           motif: creneau.motif,
@@ -36,9 +38,12 @@ export class VisitesMedCalendrierComponent {
           heureDebutVisite: creneau.heureDebutVisite,
           heureFinVisite: creneau.heureFinVisite,
           collaborateur: creneau.collaborateur,
-          documents: creneau.documents // Inclure les documents ici
+          documents: creneau.documents,
+          idCréneau: creneau.idCréneau  // Mise à jour ici
         }
       }));
+      console.log(events);  // Vérifiez ici si les événements ont la classe 'event-annule'
+
 
       this.calendarOptions = {
         ...this.calendarOptions,
@@ -50,10 +55,11 @@ export class VisitesMedCalendrierComponent {
   // Gérer le clic sur un événement
   handleEventClick(info: any) {
     const visiteData = info.event.extendedProps;  // Les détails de la visite sont dans extendedProps
-    this.dialog.open(VisiteMedDetailsDialogComponent, {
+    const dialogRef= this.dialog.open(VisiteMedDetailsDialogComponent, {
       width: '400px',
       data: {
         title: info.event.title,
+        idCréneau: visiteData.idCréneau,  // Utilisation de idCréneau
         typeVisite: visiteData.typeVisite,
         date: visiteData.date,
         heureDebut: visiteData.heureDebutVisite,
@@ -62,6 +68,18 @@ export class VisitesMedCalendrierComponent {
         statut: visiteData.statusVisite,
         documents: visiteData.documents,  // Passer les documents au dialogue
         collaborateur: visiteData.collaborateur
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.action === 'annuler') {
+        // Handle the cancellation logic here
+        const motifAnnulation = result.motifAnnulation;
+        const idCréneau = result.idCréneau;
+        
+        this.creneauService.annulerCreneau(idCréneau, motifAnnulation).subscribe(() => {
+          // Optionally, refresh the calendar or show a success message
+          this.ngOnInit(); // Refresh the calendar after cancellation
+        });
       }
     });
   }

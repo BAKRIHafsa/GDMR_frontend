@@ -12,6 +12,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class VisitedetailscollabComponent { 
    justification: string = ''; // For non-validation justification
    showJustificationField: boolean = false; // Pour afficher/cacher le champ de justification
+   motifAnnulation: string = ''; // For cancellation reason
+   showAnnulationField: boolean = false; // To show/hide the cancellation field
+
 
 
   constructor(
@@ -32,6 +35,18 @@ export class VisitedetailscollabComponent {
 
   nonValider(): void {
     this.showJustificationField = true; // Affiche le champ de justification
+  }
+
+  annuler(): void {
+    this.showAnnulationField = true; // Affiche le champ de motif d'annulation
+  }
+
+  submitAnnulation(): void {
+    if (!this.motifAnnulation || this.motifAnnulation.trim() === '') {
+      this.snackBar.open('Le motif d\'annulation est obligatoire.', 'Fermer', { duration: 3000 });
+      return;
+    }
+    this.dialogRef.close({ action: 'annuler', creneauId: this.data.idCréneau, motifAnnulation: this.motifAnnulation });
   }
 
   submitNonValidation(): void {

@@ -1,12 +1,16 @@
 <h2>Notifications</h2>
-<ul>
-  <li *ngFor="let notification of data.notifications" [class.unread]="!notification.lu">
-    <span>{{ notification.message }}</span>
-    <button *ngIf="!notification.lu" (click)="markAsRead(notification.id)">Mark as read</button>
-  </li>
-</ul>
+<div class="notifications-container">
+  <ul>
+    <li *ngFor="let notification of data.notifications.slice(0, visibleCount)" [class.unread]="!notification.lu">
+      <span>{{ notification.message }}</span>
+      <button *ngIf="!notification.lu" (click)="markAsRead(notification.id)">Mark as read</button>
+    </li>
+  </ul>
+</div>
 <div>
-  <!-- Bouton pour marquer toutes les notifications comme lues -->
+  <button (click)="loadMore()" *ngIf="visibleCount < data.notifications.length">Load More</button>
+</div>
+<div>
   <button (click)="markAllAsRead()" *ngIf="unreadCount > 0">Mark All as Read</button>
 </div>
 <div>

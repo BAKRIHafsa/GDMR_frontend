@@ -10,7 +10,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class NotificationsDialogComponent {
   unreadCount: number = 0;
-  
+  visibleCount = 5; 
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { notifications: Notification[] },
@@ -20,7 +21,9 @@ export class NotificationsDialogComponent {
     // Initialisation du nombre de notifications non lues
     this.unreadCount = this.data.notifications.filter(notification => !notification.lu).length;
   }
-  
+  loadMore() {
+    this.visibleCount += 5; // Charge 5 notifications supplémentaires
+  }
 
   markAsRead(notificationId: number): void {
     this.notificationService.markAsRead(notificationId).subscribe(() => {

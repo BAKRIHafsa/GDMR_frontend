@@ -4,8 +4,10 @@
   padding: 10px;
   border: 1px solid #ccc; /* Ajoutez une bordure pour le style */
   border-radius: 4px; /* Coins arrondis pour le conteneur */
+  background-color: #f9f9f9; /* Fond léger pour le conteneur */
 }
 
 .unread {
   font-weight: bold; /* Met en évidence les notifications non lues */
+  color: red; /* Couleur rouge pour les notifications non lues */
 }

@@ -21,4 +21,17 @@
     width: 100%;
     height: auto;
   }
+ /* Style pour les événements annulés */
+::ng-deep .event-annule {
+  color: red; /* Rend le titre de l'événement en rouge */
+  text-decoration: underline; /* Soulignement simple */
+}
+
+::ng-deep .event-annule .fc-event-title {
+  color: red; /* Assure que le titre de l'événement est en rouge */
+  border-bottom: 2px solid red; /* Ajoute une ligne rouge sous le titre */
+  display: inline-block; /* Nécessaire pour que le trait s'applique uniquement au titre */
+}
+
+  
   
