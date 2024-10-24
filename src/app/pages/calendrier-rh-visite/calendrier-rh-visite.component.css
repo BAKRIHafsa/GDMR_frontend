@@ -21,3 +21,28 @@
   width: 100%;
   height: auto;
 }
+::ng-deep .event-termine {
+  background-color: #4caf50 !important; /* Utilisez !important si nécessaire pour forcer l'application */
+  color: white;
+}
+
+::ng-deep .event-en-cours {
+  background-color: #ff9800 !important;
+  color: white;
+}
+
+::ng-deep .event-planifie {
+  background-color: #2196f3 !important;
+  color: white;
+}
+
+::ng-deep .event-annule {
+  background-color: #ff1100 !important;
+  color: white;
+}
+
+::ng-deep .event-non-valide {
+  background-color: #f6ff00 !important;
+  color: black;
+}
+

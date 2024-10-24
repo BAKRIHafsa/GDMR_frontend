@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { CreneauService, Creneau } from '../services/creneau.service';
+import { CreneauService, Creneau, StatusVisite } from '../services/creneau.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { VisiteDetailsDialogComponent } from '../visite-details-dialog/visite-details-dialog.component';
@@ -58,6 +58,7 @@ export class CalendrierRhVisiteComponent implements OnInit {
             title: creneau.typeVisite,
             start: this.createDateTime(creneau.date, creneau.heureDebutVisite),
             end: this.createDateTime(creneau.date, creneau.heureFinVisite),
+            classNames: this.getEventClass(creneau.statusVisite), // Apply CSS class based on status
             extendedProps: {
               id: creneau.idCréneau,
               date: creneau.date,
@@ -120,4 +121,50 @@ export class CalendrierRhVisiteComponent implements OnInit {
     });
 }
 
+mapStringToStatusVisite(status: string): StatusVisite {
+  switch (status) {
+    case 'PLANIFIE':
+      return StatusVisite.PLANIFIE;
+    case 'EN_COURS':
+      return StatusVisite.EN_COURS;
+    case 'TERMINE':
+      return StatusVisite.TERMINE;
+    case 'ANNULE':
+      return StatusVisite.ANNULE;
+      case 'NON_VALIDE':
+        return StatusVisite.NON_VALIDE;
+      case 'VALIDE':
+        return StatusVisite.VALIDE;
+      case 'EN_ATTENTE_VALIDATION':
+      return StatusVisite.EN_ATTENTE_VALIDATION;
+    default:
+      console.error(`Statut visite inconnu: ${status}`); // Log the unknown status
+      throw new Error('Statut visite inconnu');
+  }
+}
+getEventClass(status: string): string {
+  const statusVisite = this.mapStringToStatusVisite(status);
+  let className = '';
+  switch (statusVisite) {
+    case StatusVisite.TERMINE:
+      className = 'event-termine';
+      break;
+    case StatusVisite.EN_COURS:
+      className = 'event-en-cours';
+      break;
+    case StatusVisite.PLANIFIE:
+      className = 'event-planifie';
+      break;
+    case StatusVisite.ANNULE:
+      className = 'event-annule';
+      break;
+    case StatusVisite.NON_VALIDE:
+      className = 'event-non-valide';
+      break;
+    default:
+      className = '';
+  }
+  console.log('Class for event:', className); // Ajoutez ce log
+  return className;
+}
 }

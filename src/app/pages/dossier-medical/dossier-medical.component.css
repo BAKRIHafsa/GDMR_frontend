@@ -1,0 +1,43 @@
+/* Center the dialog title */
+mat-dialog-title {
+    text-align: center;
+    font-size: 24px; /* Adjust the size as needed */
+    color: #3f51b5; /* Primary color */
+  }
+  
+  /* Add some margin to the content */
+  mat-dialog-content {
+    padding: 20px;
+  }
+  
+  /* Style the form fields */
+  mat-form-field {
+    width: 100%; /* Full width for the form fields */
+    margin-bottom: 15px; /* Space between fields */
+  }
+  
+  /* Style the action buttons */
+  mat-dialog-actions {
+    justify-content: space-between; /* Space out the buttons */
+  }
+  
+  /* Style the add button */
+  button.mat-button {
+    background-color: #3f51b5; /* Primary color */
+    color: white;
+  }
+  
+  button.mat-button:hover {
+    background-color: #303f9f; /* Darker shade on hover */
+  }
+  
+  /* Style the close button */
+  button.mat-button[mat-dialog-close] {
+    background-color: transparent; /* Default color for close button */
+    color: #f44336; /* Red color for the close button */
+  }
+  
+  button.mat-button[mat-dialog-close]:hover {
+    background-color: rgba(244, 67, 54, 0.1); /* Light red on hover */
+  }
+  

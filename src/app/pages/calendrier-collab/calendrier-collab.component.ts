@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreneauService, Creneau } from '../services/creneau.service';
+import { CreneauService, Creneau, StatusVisite } from '../services/creneau.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarOptions } from '@fullcalendar/core';
@@ -64,6 +64,7 @@ export class CalendrierCollabComponent implements OnInit {
           title: creneau.typeVisite,
           start: `${creneau.date}T${creneau.heureDebutVisite}`,
           end: `${creneau.date}T${creneau.heureFinVisite}`,
+          className: this.getEventClass(creneau.statusVisite), // Add this line to apply CSS class
           backgroundColor: creneau.statusVisite === 'EN_ATTENTE_VALIDATION' ? 'red' : '', 
           extendedProps: {
             idCréneau: creneau.idCréneau,
@@ -166,6 +167,50 @@ annulerCreneau(idCreneau: number, motifAnnulation: string): void {
       this.snackBar.open(err.error.message || 'Erreur lors de l\'annulation du créneau.', 'Fermer', { duration: 3000 });
     }
   });
+}
+
+mapStringToStatusVisite(status: string): StatusVisite {
+  switch (status) {
+    case 'PLANIFIE':
+      return StatusVisite.PLANIFIE;
+    case 'EN_COURS':
+      return StatusVisite.EN_COURS;
+    case 'TERMINE':
+      return StatusVisite.TERMINE;
+    case 'ANNULE':
+      return StatusVisite.ANNULE;
+      case 'NON_VALIDE':
+        return StatusVisite.NON_VALIDE;
+        case 'VALIDE':
+        return StatusVisite.VALIDE;
+    default:
+      console.error(`Statut visite inconnu: ${status}`); // Log the unknown status
+      throw new Error('Statut visite inconnu');
+  }
+}
+
+
+getEventClass(status: string): string {
+  const statusVisite = this.mapStringToStatusVisite(status);
+  let className = '';
+  switch (statusVisite) {
+    case StatusVisite.TERMINE:
+      className = 'event-termine';
+      break;
+    case StatusVisite.EN_COURS:
+      className = 'event-en-cours';
+      break;
+    case StatusVisite.PLANIFIE:
+      className = 'event-planifie';
+      break;
+    case StatusVisite.ANNULE:
+      className = 'event-annule';
+      break;
+    default:
+      className = '';
+  }
+  console.log('Class for event:', className); // Ajoutez ce log
+  return className;
 }
 
 }

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MedecinService } from '../services/medecin.service';
-import { CreneauService, Creneau } from '../services/creneau.service';
+import { CreneauService, StatusVisite } from '../services/creneau.service';
 import { CalendarOptions } from '@fullcalendar/core';  // Import depuis @fullcalendar/core
 import dayGridPlugin from '@fullcalendar/daygrid';     // Import du plugin dayGrid
 import interactionPlugin from '@fullcalendar/interaction';
 import { MatDialog } from '@angular/material/dialog';
-import { VisiteMedDetailsDialogComponent } from '../visite-med-details-dialog/visite-med-details-dialog.component';  // Le popup pour les détails de visite
+import { VisiteMedDetailsDialogComponent } from '../visite-med-details-dialog/visite-med-details-dialog.component'; 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-visites-med-calendrier',
@@ -20,7 +22,7 @@ export class VisitesMedCalendrierComponent {
     eventClick: this.handleEventClick.bind(this)  // Gérer le clic sur un événement
   };
 
-  constructor(private medecinService: MedecinService, private dialog: MatDialog, private creneauService: CreneauService) {}
+  constructor(private medecinService: MedecinService, private dialog: MatDialog, private creneauService: CreneauService,private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     // Récupérer les créneaux (visites) du médecin connecté
@@ -29,7 +31,7 @@ export class VisitesMedCalendrierComponent {
         title: `${creneau.typeVisite}`,
         start: `${creneau.date}T${creneau.heureDebutVisite}`,
         end: `${creneau.date}T${creneau.heureFinVisite}`,
-        classNames: creneau.statusVisite === 'ANNULE' ? 'event-annule' : '',
+        classNames: this.getEventClass(creneau.statusVisite), // Appel à la méthode pour obtenir la classe
         extendedProps: {
           typeVisite: creneau.typeVisite,
           motif: creneau.motif,
@@ -47,9 +49,33 @@ export class VisitesMedCalendrierComponent {
 
       this.calendarOptions = {
         ...this.calendarOptions,
-        events
+        events,
+        eventClassNames: (arg) => {
+          return this.getEventClass(arg.event.extendedProps['statusVisite']);
+        }
+        
       };
     });
+  }
+
+  updateStatus(idCreneau: number, currentStatus: StatusVisite) {
+    let newStatus: StatusVisite | null = null;
+
+    if (currentStatus === StatusVisite.PLANIFIE) {
+      newStatus = StatusVisite.EN_COURS;
+    } else if (currentStatus === StatusVisite.EN_COURS) {
+      newStatus = StatusVisite.TERMINE;
+    }
+
+    if (newStatus) {
+      this.creneauService.updateCreneauStatusEtEnvoiNotif(idCreneau, newStatus).subscribe(() => {
+        this.snackBar.open(`Statut mis à jour avec succès à ${newStatus}.`, 'Fermer', { duration: 3000 });
+        this.ngOnInit(); // Rafraîchit le calendrier après la mise à jour
+      }, 
+      (error) => {
+        this.snackBar.open('Erreur lors de la mise à jour du statut.', 'Fermer', { duration: 3000 });
+      });
+    }
   }
 
   // Gérer le clic sur un événement
@@ -83,4 +109,41 @@ export class VisitesMedCalendrierComponent {
       }
     });
   }
+  mapStringToStatusVisite(status: string): StatusVisite {
+    switch (status) {
+      case 'PLANIFIE':
+        return StatusVisite.PLANIFIE;
+      case 'EN_COURS':
+        return StatusVisite.EN_COURS;
+      case 'TERMINE':
+        return StatusVisite.TERMINE;
+      case 'ANNULE':
+        return StatusVisite.ANNULE;
+      default:
+        throw new Error('Statut visite inconnu');
+    }
+  }
+  getEventClass(status: string): string {
+    const statusVisite = this.mapStringToStatusVisite(status);
+    let className = '';
+    switch (statusVisite) {
+      case StatusVisite.TERMINE:
+        className = 'event-termine';
+        break;
+      case StatusVisite.EN_COURS:
+        className = 'event-en-cours';
+        break;
+      case StatusVisite.PLANIFIE:
+        className = 'event-planifie';
+        break;
+      case StatusVisite.ANNULE:
+        className = 'event-annule';
+        break;
+      default:
+        className = '';
+    }
+    console.log('Class for event:', className); // Log pour déboguer
+    return className;
+  }
+  
 }

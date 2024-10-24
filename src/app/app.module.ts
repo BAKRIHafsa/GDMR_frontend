@@ -58,6 +58,7 @@ import { DemandeVisiteSpontaneeComponent } from './pages/demande-visite-spontane
 import { VisitesMedCalendrierComponent } from './pages/visites-med-calendrier/visites-med-calendrier.component';
 import { VisiteMedDetailsDialogComponent } from './pages/visite-med-details-dialog/visite-med-details-dialog.component';
 import { ChangePasswordFirstComponent } from './pages/change-password-first/change-password-first.component';
+import { DossierMedicalComponent } from './pages/dossier-medical/dossier-medical.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { ChangePasswordFirstComponent } from './pages/change-password-first/chan
     VisitesMedCalendrierComponent,
     VisiteMedDetailsDialogComponent,
     ChangePasswordFirstComponent,
+    DossierMedicalComponent,
   ],
   imports: [
     BrowserModule,

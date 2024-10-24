@@ -47,6 +47,17 @@ export interface ModifierCreneauDTO{
   medecinId?: number; 
 
 }
+
+export enum StatusVisite {
+  PLANIFIE = 'PLANIFIE',
+  EN_COURS = 'EN_COURS',
+  TERMINE = 'TERMINE',
+  ANNULE = 'ANNULE',
+  VALIDE = 'VALIDE',
+  NON_VALIDE = 'NON_VALIDE',
+  EN_ATTENTE_CREATION_CRENEAU = 'EN_ATTENTE_CREATION_CRENEAU',
+  EN_ATTENTE_VALIDATION = 'EN_ATTENTE_VALIDATION'
+}
 export interface CreneauRequestDTO {
   motif: string;
 }
@@ -124,7 +135,23 @@ export class CreneauService {
 
   annulerCreneau(idCreneau: number, motifAnnulation: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/collab/annuler/${idCreneau}`, motifAnnulation, { responseType: 'text' });
+  }
+
+  updateCreneauStatusEtEnvoiNotif(idCreneau: number, status: StatusVisite): Observable<any> {
+    return this.http.put(`${this.apiUrl}/med/status/${idCreneau}`, 
+      JSON.stringify(status),  // Envoyer un objet JSON
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            responseType: 'text'
+        }
+    );
 }
+
+
+
+  
 
   
   

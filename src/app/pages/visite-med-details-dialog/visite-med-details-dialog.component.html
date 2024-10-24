@@ -18,8 +18,23 @@
     <p>Aucun document n'a été envoyé.</p>
   </ng-template>
 
-  <!-- New section for cancellation -->
-  <ng-container *ngIf="data.statut !== 'ANNULE'">
+  <h3>Dossiers Médicaux Associés:</h3>
+  <ul *ngIf="dossiersMedicaux.length > 0; else noDossiers">
+    <li *ngFor="let dossier of dossiersMedicaux">
+      <strong>Description:</strong> {{ dossier.description }}<br>
+      <strong>Médicaments:</strong> {{ dossier.medicaments }}<br>
+    </li>
+  </ul>
+  <ng-template #noDossiers>
+    <p>Aucun dossier médical associé à cette visite.</p>
+  </ng-template>
+
+  <ng-container *ngIf="data.statut !== 'TERMINE' && data.statut !== 'ANNULE'">
+    <h3>Changer le statut de la visite</h3>
+    <button mat-button (click)="changeStatus()">{{ data.statut === 'PLANIFIE' ? 'Passer à EN_COURS' : 'Passer à TERMINÉ' }}</button>
+  </ng-container>
+
+  <ng-container  *ngIf="data.statut !== 'TERMINE' && data.statut !== 'ANNULE' && data.statut !== 'EN_COURS'">
   <h3>Annuler la visite</h3>
   <mat-form-field appearance="fill">
     <mat-label>Motif d'annulation</mat-label>
@@ -29,6 +44,8 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button *ngIf="data.statut !== 'ANNULE'" (click)="onAnnuler()">Annuler la visite</button>
+  <button mat-button *ngIf="data.statut !== 'TERMINE' && data.statut !== 'ANNULE' && data.statut !== 'EN_COURS'" (click)="onAnnuler()">Annuler la visite</button>
+  <!-- Add this button inside the mat-dialog-actions or wherever appropriate -->
+  <button mat-button (click)="openDossierMedicalDialog()">Ajouter Dossier Médical</button>
   <button mat-button mat-dialog-close>Fermer</button>
 </div>

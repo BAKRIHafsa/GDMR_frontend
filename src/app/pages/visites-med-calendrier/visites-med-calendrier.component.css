@@ -22,16 +22,33 @@
     height: auto;
   }
  /* Style pour les événements annulés */
-::ng-deep .event-annule {
-  color: red; /* Rend le titre de l'événement en rouge */
-  text-decoration: underline; /* Soulignement simple */
+/* ::ng-deep .event-annule {
+  color: red; 
+  text-decoration: underline; 
 }
 
 ::ng-deep .event-annule .fc-event-title {
-  color: red; /* Assure que le titre de l'événement est en rouge */
-  border-bottom: 2px solid red; /* Ajoute une ligne rouge sous le titre */
-  display: inline-block; /* Nécessaire pour que le trait s'applique uniquement au titre */
+  color: red;
+  border-bottom: 2px solid red; 
+  display: inline-block; 
+} */
+
+::ng-deep .event-termine {
+  background-color: #4caf50 !important; /* Utilisez !important si nécessaire pour forcer l'application */
+  color: white;
 }
 
-  
-  
+::ng-deep .event-en-cours {
+  background-color: #ff9800 !important;
+  color: white;
+}
+
+::ng-deep .event-planifie {
+  background-color: #2196f3 !important;
+  color: white;
+}
+
+::ng-deep .event-annule {
+  background-color: #ff1100 !important;
+  color: white;
+}

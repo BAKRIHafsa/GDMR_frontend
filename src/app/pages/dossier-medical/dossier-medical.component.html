@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Ajouter Dossier Médical</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="dossierMedical.description" placeholder="Entrez la description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Médicaments</mat-label>
+    <textarea matInput [(ngModel)]="dossierMedical.medicaments" placeholder="Entrez les médicaments"></textarea>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="ajouterDossier()">Ajouter Dossier</button>
+  <button mat-button mat-dialog-close>Fermer</button>
+</div>
