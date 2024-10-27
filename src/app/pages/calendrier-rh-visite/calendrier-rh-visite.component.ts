@@ -54,33 +54,39 @@ export class CalendrierRhVisiteComponent implements OnInit {
       this.creneauService.getAllCreneaux().subscribe(
         (creneaux: Creneau[]) => {
           console.log('All Creneaux response:', creneaux);
-          this.calendarOptions.events = creneaux.map((creneau) => ({
-            title: creneau.typeVisite,
-            start: this.createDateTime(creneau.date, creneau.heureDebutVisite),
-            end: this.createDateTime(creneau.date, creneau.heureFinVisite),
-            classNames: this.getEventClass(creneau.statusVisite), // Apply CSS class based on status
-            extendedProps: {
-              id: creneau.idCréneau,
-              date: creneau.date,
-              heureDebutVisite: this.createDateTime(creneau.date, creneau.heureDebutVisite), 
-            heureFinVisite: this.createDateTime(creneau.date, creneau.heureFinVisite),
-              typeVisite: creneau.typeVisite,
-              statusVisite: creneau.statusVisite,
-              collaborateur: creneau.collaborateur,
-              medecin: creneau.medecin,
-              chargeRh: creneau.chargeRh,
-              motif: creneau.motif,
-              justifNonValide: creneau.justifNonValide || 'Non défini',
-              justifAnnuleMedecin: creneau.justifAnnuleMedecin || 'Non défini',
-              justifAnnuleCollaborateur: creneau.justifAnnuleCollaborateur || 'Non défini',
-            },
-          }));
+          this.calendarOptions.events = creneaux.map((creneau) => {
+            // Check if creneau is incomplete (status is EN_ATTENTE_CREATION or missing times)
+            const isPending = creneau.statusVisite === 'EN_ATTENTE_CREATION_CRENEAU' || !creneau.heureDebutVisite || !creneau.heureFinVisite;
+    
+            return {
+              title: isPending ? 'Pending Visit' : creneau.typeVisite,
+              start: isPending ? null : this.createDateTime(creneau.date, creneau.heureDebutVisite),
+              end: isPending ? null : this.createDateTime(creneau.date, creneau.heureFinVisite),
+              classNames: isPending ? 'event-pending' : this.getEventClass(creneau.statusVisite),
+              extendedProps: {
+                id: creneau.idCréneau,
+                date: creneau.date,
+                heureDebutVisite: creneau.heureDebutVisite,
+                heureFinVisite: creneau.heureFinVisite,
+                typeVisite: creneau.typeVisite,
+                statusVisite: creneau.statusVisite,
+                collaborateur: creneau.collaborateur,
+                medecin: creneau.medecin,
+                chargeRh: creneau.chargeRh,
+                motif: creneau.motif,
+                justifNonValide: creneau.justifNonValide || 'Non défini',
+                justifAnnuleMedecin: creneau.justifAnnuleMedecin || 'Non défini',
+                justifAnnuleCollaborateur: creneau.justifAnnuleCollaborateur || 'Non défini',
+              },
+            };
+          });
         },
         (error) => {
           console.error('Erreur lors du chargement des visites:', error);
         }
       );
     }
+    
     
 
     createDateTime(date: string, time: string): Date {

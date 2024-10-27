@@ -46,3 +46,9 @@
   color: black;
 }
 
+.event-pending {
+  background-color: #ff6f00; /* Yellow for pending events */
+  color: #000; /* Black text for contrast */
+}
+
+

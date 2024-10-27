@@ -28,6 +28,10 @@ import { ChangePasswordFirstComponent } from './pages/change-password-first/chan
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
+    path: 'change-password-first',
+    component: ChangePasswordFirstComponent,
+  },
+  {
     path: 'main',
     component: MainPageComponent,
     canActivate: [AuthGuard],
@@ -117,10 +121,7 @@ const routes: Routes = [
         path: 'visites-med-calendrier', 
         component: VisitesMedCalendrierComponent,
       },
-      {
-        path: 'change-password-first',
-        component: ChangePasswordFirstComponent,
-      },
+      
       
     ],
   },

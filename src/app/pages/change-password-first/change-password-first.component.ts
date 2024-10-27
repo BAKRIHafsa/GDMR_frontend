@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password-first',
@@ -14,7 +15,7 @@ export class ChangePasswordFirstComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar, private router: Router
   ) {
     this.changePasswordForm = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(6)]], // Ajoutez d'autres validateurs selon vos besoins
@@ -28,12 +29,14 @@ export class ChangePasswordFirstComponent {
           this.snackBar.open('Mot de passe changé avec succès', 'Fermer', {
             duration: 3000,
           });
-          this.changePasswordForm.reset(); // Réinitialiser le formulaire
+          this.router.navigate(['/login']);
+          //this.changePasswordForm.reset(); // Réinitialiser le formulaire
         },
         (error) => {
           console.error('Erreur lors du changement de mot de passe:', error);
           this.snackBar.open('Erreur lors du changement de mot de passe', 'Fermer', {
             duration: 3000,
+            panelClass: ['error-snackbar'],
           });
         }
       );

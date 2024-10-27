@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { User } from '../models/user.model';
+import { Router } from '@angular/router';
 
 
 interface LoginResponse {
   access_token: string;
+  userId: number;
+  username: string;
+  firstLogin: boolean; // Or whatever your property is named
+  change_password_required?: boolean;
 }
 
 export interface UserProfile {
@@ -29,20 +34,44 @@ export class AuthService {
   private apiUrl = 'http://localhost:8080/api';
   private currentRole: string | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   changePasswordFirst(request: { password: string }): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/user/change-password-premier-fois`, request);
-  }
+    const token = sessionStorage.getItem('access_token'); // Récupérer le token
+
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}` // Ajouter le token à l'en-tête
+    });
+
+    return this.http.post<void>(`${this.apiUrl}/user/change-password`, request, { headers }).pipe(
+        tap(() => {
+            // Gérer le succès
+        }),
+        catchError(error => {
+            console.error('Error changing password:', error);
+            return throwError(() => new Error('Password change failed'));
+        })
+    );
+}
+
+
+
 
   login(username: string, password: string): Observable<LoginResponse> {
     return this.http
       .post<LoginResponse>(`${this.apiUrl}/auth/login`, { username, password })
       .pipe(
         tap((response) => {
-          if (response && response.access_token) {
-            sessionStorage.setItem('access_token', response.access_token);
+          if (response.change_password_required) {
+            // Stocker le jeton ici pour toutes les réponses
+            if (!response.change_password_required && response.access_token) {
+              sessionStorage.setItem('access_token', response.access_token);
+            }
           }
+        }),
+        catchError((error) => {
+          console.error('Login error:', error);
+          return throwError(() => new Error('Login failed'));
         })
       );
   }

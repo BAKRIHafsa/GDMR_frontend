@@ -1,11 +1,21 @@
 .main-container {
   display: flex;
+  background-color: #f8f9fa;
+  padding: 20px; /* Espace autour du tableau de bord */
 }
 
 .sidebar {
-  width: 200px; /* Ajustez selon vos besoins */
-  margin-right: 20px; /* Ajout d'une marge à droite */
+  width: 200px;
+  margin-right: 20px;
 }
+
+.notification-icon-container {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .notification-icon {
   position: relative;
   font-size: 24px;
@@ -14,14 +24,14 @@
 }
 
 .notification-icon.has-unread {
-  color: red; /* Change la couleur si unreadCount > 0 */
+  color: #ff4d4f;
 }
 
 .badge {
   position: absolute;
-  top: 0;
-  right: 0;
-  background-color: red;
+  top: -4px;
+  right: -4px;
+  background-color: #ff4d4f;
   color: white;
   border-radius: 50%;
   padding: 2px 6px;
@@ -30,39 +40,73 @@
 
 .content {
   flex: 1;
-  padding-left: 20px; /* Ajout d'un rembourrage à gauche */
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff; /* Ajout d’un fond blanc pour se démarquer */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 40px; /* Plus de marge sous le titre */
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
 }
 
 .stats-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  gap: 20px; /* Espacement entre les cartes */
+  margin-bottom: 30px;
 }
 
 .stat-box {
-  width: 48%;
-  padding: 15px;
+  flex: 1;
+  background-color: #fff;
+  padding: 25px;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.stat-box:hover {
+  transform: scale(1.05);
+}
+
+.number {
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
 }
 
 .stat-number {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
-  text-align: center;
+  color: #1e88e5;
+  margin-top: 8px;
 }
+
 .détails {
   font-weight: bold;
+  font-size: 22px;
+  color: #333;
+  text-align: left;
+  margin: 20px 0; /* Marge au-dessus et en dessous */
 }
 
 .visits-table {
   width: 100%;
-}
-
-.dashboard {
-  flex: content;
-  margin-left: 20px;
   margin-top: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 table {
@@ -72,29 +116,48 @@ table {
 
 th,
 td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  padding: 15px; /* Plus d’espace dans chaque cellule */
   text-align: left;
 }
 
 th {
-  background-color: #f2f2f2c4;
+  background-color: #e3f2fd;
+  font-weight: bold;
   text-align: center;
+  color: #333;
 }
 
-.number {
-  text-align: center;
-  font-weight: bold; /* Met le texte en gras */
+td {
+  color: #555;
 }
 
-.title {
-  text-align: center; /* Centre le titre */
-  margin-bottom: 30px; /* Espace sous le titre */
-  margin-top: 10px;
+td.status {
+  font-weight: bold;
+  text-transform: capitalize;
 }
 
-h1 {
-  font-size: 24px; /* Taille de la police du titre */
-  color: #333; /* Couleur du texte du titre */
-  font-weight: bold; /* Met le texte en gras */
+td.status.planifié {
+  color: #1e88e5;
+}
+
+td.status.terminé {
+  color: #43a047;
+}
+
+td.status.annulé {
+  color: #e53935;
+}
+
+td.status.en-cours {
+  color: #ffa726;
+}
+
+.dashboard {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.material-icons {
+  vertical-align: middle;
 }

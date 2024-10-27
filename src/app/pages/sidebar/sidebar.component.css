@@ -1,16 +1,20 @@
 /* Sidebar container */
 .sidebar {
-  width: 250px; /* Adjust the width as needed */
+  width: 250px;
   background-color: #2c3e50;
   color: #ecf0f1;
-  height: 100vh; /* Full viewport height */
-  position: fixed; /* Fixed positioning to stay in place */
+  height: 100vh;
+  position: fixed;
   top: 0;
-  left: 0; /* Pin it to the left edge */
+  left: 0;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  z-index: 1000; /* Ensure it's above other content */
+  padding: 20px 15px; /* Padding latéral réduit */
+  z-index: 1000;
+}
+.sidebar-content ul {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Logo and user information */
@@ -18,31 +22,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px; /* Espacement accru */
 }
 
 .user-initials {
   background-color: #34495e;
   color: #ecf0f1;
   border-radius: 50%;
-  width: 60px; /* Increased size */
-  height: 60px; /* Increased size */
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px; /* Increased font size */
+  font-size: 28px;
   font-weight: bold;
-  text-decoration: none; /* Remove underline */
+  text-decoration: none;
+  transition: background-color 0.3s;
 }
 .user-initials:hover {
-  background-color: #2980b9; /* Couleur de survol vive */
-  cursor: pointer; /* Change le curseur pour indiquer que l'élément est cliquable */
+  background-color: #2980b9;
+  cursor: pointer;
 }
 
 .user-fullname {
-  margin-top: 10px;
-  font-size: 18px; /* Increased font size */
+  margin-top: 12px;
+  font-size: 18px;
   text-align: center;
+  padding: 0 10px; /* Padding latéral pour éviter chevauchements */
 }
 
 /* Sidebar content */
@@ -56,11 +62,10 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  flex-grow: 1;
 }
 
 .menu-item {
-  margin-bottom: 20px; /* Increased spacing between items */
+  margin-bottom: 18px;
 }
 
 .menu-item a {
@@ -68,10 +73,10 @@ ul {
   align-items: center;
   color: #ecf0f1;
   text-decoration: none;
-  padding: 15px; /* Increased padding */
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  font-size: 16px; /* Increased font size */
+  padding: 12px 20px; /* Padding intérieur accru */
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  font-size: 16px;
 }
 
 .menu-item a:hover {
@@ -79,44 +84,29 @@ ul {
 }
 
 .menu-icon {
-  display: flex;
-  align-items: center;
-  margin-right: 15px; /* Increased spacing for better visibility */
+  margin-right: 12px; /* Espacement pour l'icône */
 }
 
 .menu-icon i {
-  font-size: 24px; /* Increased icon size */
-  margin-right: 10px; /* Adjust spacing between icons if needed */
+  font-size: 22px;
 }
 
 .menu-title {
-  font-size: 16px; /* Increased font size */
+  font-size: 16px;
 }
 
-/* Logout button */
-.sidebar-content ul {
-  display: flex;
-  flex-direction: column;
-}
-
-.menu-item:last-child {
-  margin-top: auto;
-}
-
-.menu-item:last-child a {
-  color: #e74c3c;
-  font-size: 18px; /* Increased font size for logout */
-}
-
-.menu-item:last-child a:hover {
-  background-color: #c0392b;
-}
-
+/* Last item styling */
 .menu-item a.active {
   background-color: #1abc9c;
   color: #ffffff;
 }
 
-.menu-item a.active .menu-icon i {
-  color: #ffffff;
+/* Add this to your existing CSS */
+.menu-item a.logout {
+  color: red; /* Set the text color to red */
 }
+
+.menu-item a.logout:hover {
+  color: #e74c3c; /* Optional: Change color on hover */
+}
+

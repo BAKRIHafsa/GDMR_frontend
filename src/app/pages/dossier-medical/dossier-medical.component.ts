@@ -13,7 +13,8 @@ export class DossierMedicalComponent {
   dossierMedical: any = {
     description: '',
     medicaments: '',
-    creneau: { idCréneau: null } // Initialize creneau as an empty object
+    creneau: { idCréneau: null },
+    collaborateur: { idUser: null } // Initialize creneau as an empty object
   };
 
   constructor(
@@ -26,15 +27,22 @@ export class DossierMedicalComponent {
   }
 
   ajouterDossier() {
-    this.dossierMedicalService.ajouterDossierMedical(this.dossierMedical).subscribe(
-      (response) => {
-        this.snackBar.open('Dossier médical ajouté avec succès!', 'Fermer', { duration: 3000 });
-        this.dialogRef.close(response); // Close dialog with response data
-      },
-      (error) => {
-        this.snackBar.open('Erreur lors de l\'ajout du dossier médical.', 'Fermer', { duration: 3000 });
-        console.error('Erreur lors de l\'ajout du dossier médical', error);
-      }
-    );
+    if (!this.dossierMedical.collaborateur?.idUser) {
+      console.error('Collaborateur ID is required');
+      this.snackBar.open('Collaborateur ID is required', 'Close', { duration: 3000 });
+      return;
+    }
+    this.dossierMedicalService.ajouterDossierMedical(this.dossierMedical, this.dossierMedical.collaborateur.idUser)
+      .subscribe(
+        (response) => {
+          this.snackBar.open('Dossier médical ajouté avec succès!', 'Fermer', { duration: 3000 });
+          this.dialogRef.close(response);
+        },
+        (error) => {
+          this.snackBar.open('Erreur lors de l\'ajout du dossier médical.', 'Fermer', { duration: 3000 });
+          console.error('Erreur lors de l\'ajout du dossier médical', error);
+        }
+      );
   }
+  
 }

@@ -9,6 +9,9 @@ export interface DossierMedical {
     creneau: {
       idCréneau: number; // Include any necessary properties related to Creneau
     };
+    collaborateur: {
+        idUser: number; // Include any necessary properties related to Creneau
+    };
   }
   
 @Injectable({
@@ -19,9 +22,10 @@ export class DossierMedicalService {
 
   constructor(private http: HttpClient) {}
 
-  ajouterDossierMedical(dossierMedical: DossierMedical): Observable<DossierMedical> {
-    return this.http.post<DossierMedical>(`${this.apiUrl}/ajouter`, dossierMedical);
+  ajouterDossierMedical(dossierMedical: DossierMedical, idCollaborateur: number): Observable<DossierMedical> {
+    return this.http.post<DossierMedical>(`${this.apiUrl}/ajouter?idCollaborateur=${idCollaborateur}`, dossierMedical);
   }
+  
 
   getDossiersParCollaborateur(idCollaborateur: number): Observable<DossierMedical[]> {
     return this.http.get<DossierMedical[]>(`${this.apiUrl}/collaborateur/${idCollaborateur}`);

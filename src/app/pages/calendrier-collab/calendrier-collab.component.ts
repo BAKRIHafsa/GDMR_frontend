@@ -64,8 +64,8 @@ export class CalendrierCollabComponent implements OnInit {
           title: creneau.typeVisite,
           start: `${creneau.date}T${creneau.heureDebutVisite}`,
           end: `${creneau.date}T${creneau.heureFinVisite}`,
-          className: this.getEventClass(creneau.statusVisite), // Add this line to apply CSS class
-          backgroundColor: creneau.statusVisite === 'EN_ATTENTE_VALIDATION' ? 'red' : '', 
+          className: this.getEventClass(creneau.statusVisite),
+          backgroundColor: creneau.statusVisite === 'EN_ATTENTE_VALIDATION' ? 'red' : '',
           extendedProps: {
             idCréneau: creneau.idCréneau,
             date: creneau.date,
@@ -77,7 +77,7 @@ export class CalendrierCollabComponent implements OnInit {
             justifNonValide: creneau.justifNonValide,
             justifAnnuleMedecin: creneau.justifAnnuleMedecin,
             justifAnnuleCollaborateur: creneau.justifAnnuleCollaborateur,
-            medecin: {
+            medecin: creneau.medecin ? {
               idUser: creneau.medecin.idUser,
               nom: creneau.medecin.nom,
               prenom: creneau.medecin.prenom,
@@ -85,18 +85,17 @@ export class CalendrierCollabComponent implements OnInit {
               experience: creneau.medecin.experience,
               qualification: creneau.medecin.qualification,
               specialite: creneau.medecin.specialite,
-            },
-            collaborateur: {
+            } : null, // Set to null if medecin is null
+            collaborateur: creneau.collaborateur ? {
               idUser: creneau.collaborateur.idUser,
               nom: creneau.collaborateur.nom,
               prenom: creneau.collaborateur.prenom,
-            },
-            chargeRh: {
+            } : null, // Set to null if collaborateur is null
+            chargeRh: creneau.chargeRh ? {
               idUser: creneau.chargeRh.idUser,
               nom: creneau.chargeRh.nom,
               prenom: creneau.chargeRh.prenom,
-            },  
-            
+            } : null, // Set to null if chargeRh is null
           },
         }));
       },
@@ -105,6 +104,7 @@ export class CalendrierCollabComponent implements OnInit {
       }
     );
   }
+  
   handleEventClick(arg: any): void {
     const dialogRef = this.dialog.open(VisitedetailscollabComponent, {
       width: '400px',
@@ -179,10 +179,12 @@ mapStringToStatusVisite(status: string): StatusVisite {
       return StatusVisite.TERMINE;
     case 'ANNULE':
       return StatusVisite.ANNULE;
-      case 'NON_VALIDE':
+    case 'NON_VALIDE':
         return StatusVisite.NON_VALIDE;
-        case 'VALIDE':
+    case 'VALIDE':
         return StatusVisite.VALIDE;
+    case 'EN_ATTENTE_CREATION_CRENEAU':
+        return StatusVisite.EN_ATTENTE_CREATION_CRENEAU;
     default:
       console.error(`Statut visite inconnu: ${status}`); // Log the unknown status
       throw new Error('Statut visite inconnu');

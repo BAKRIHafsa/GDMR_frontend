@@ -63,7 +63,15 @@
         </a>
       </li>
       <li *ngIf="userProfile?.role === 'ADMINISTRATEUR'" class="menu-item">
-        <a (click)="logout()">
+        <a routerLink="/main/demande-visite-spontanee" routerLinkActive="active">
+          <span class="menu-icon">
+            <i class="ri-calendar-check-fill"></i>
+          </span>
+          <span class="menu-title">Demande une visite spontanée</span>
+        </a>
+      </li>
+      <li *ngIf="userProfile?.role === 'ADMINISTRATEUR'" class="menu-item">
+        <a (click)="logout()" class="logout">
           <span class="menu-icon">
             <i class="ri-logout-box-fill"></i>
           </span>
@@ -113,7 +121,7 @@
         </a>
       </li>
       <li *ngIf="userProfile?.role === 'CHARGE_RH'" class="menu-item">
-        <a (click)="logout()">
+        <a (click)="logout()" class="logout">
           <span class="menu-icon">
             <i class="ri-logout-box-fill"></i>
           </span>
@@ -146,7 +154,7 @@
         </a>
       </li>
       <li *ngIf="userProfile?.role === 'MEDECIN'" class="menu-item">
-        <a (click)="logout()">
+        <a (click)="logout()" class="logout">
           <span class="menu-icon">
             <i class="ri-logout-box-fill"></i>
           </span>
@@ -179,7 +187,7 @@
         </a>
       </li>
       <li *ngIf="userProfile?.role === 'COLLABORATEUR'" class="menu-item">
-        <a (click)="logout()">
+        <a (click)="logout()" class="logout">
           <span class="menu-icon">
             <i class="ri-logout-box-fill"></i>
           </span>
