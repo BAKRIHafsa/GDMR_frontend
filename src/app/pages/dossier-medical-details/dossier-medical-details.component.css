@@ -1,123 +1,135 @@
-/* Conteneur principal */
+/* Main container */
 .medical-details {
-    max-width:600px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 24px;
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Titre */
-  h2 {
-    color: #2c3e50;
-    font-size: 24px;
+    border-radius: 12px; /* Slightly larger radius for a softer look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Deeper shadow for depth */
+    transition: transform 0.3s ease;
+}
+
+.medical-details:hover {
+    transform: scale(1.02); /* Slight scaling effect on hover */
+}
+
+/* Title */
+h2 {
+    color: #34495e; /* Darker shade for a more modern feel */
+    font-size: 26px;
     margin-bottom: 24px;
     padding-bottom: 12px;
     border-bottom: 2px solid #3498db;
-  }
-  
-  /* Style pour chaque ligne d'information */
-  .info-row {
+}
+
+/* Style for each info row */
+.info-row {
     display: flex;
     align-items: center;
     margin-bottom: 16px;
     padding: 12px;
-    background-color: #f8f9fa;
-    border-radius: 4px;
+    background-color: #f0f4f8; /* Lighter background for rows */
+    border-radius: 8px; /* Rounded corners */
     transition: background-color 0.3s ease;
-  }
-  
-  .info-row:hover {
-    background-color: #e9ecef;
-  }
-  
-  /* Label (texte en gras) */
-  .info-row strong {
+}
+
+/* Hover effect */
+.info-row:hover {
+    background-color: #e1e9f2; /* Softer hover effect */
+}
+
+/* Label (bold text) */
+.info-row strong {
     flex: 0 0 140px;
-    color: #34495e;
+    color: #2c3e50;
     font-weight: 600;
-  }
-  
-  /* Valeur */
-  .info-row span {
+}
+
+/* Value */
+.info-row span {
     flex: 1;
     color: #2c3e50;
-  }
-  
-  /* Styles pour les inputs en mode édition */
-  .info-row input,
-  .info-row select {
+}
+
+/* Styles for inputs in edit mode */
+.info-row input,
+.info-row select {
     flex: 1;
-    padding: 8px 12px;
+    padding: 10px 14px; /* Slightly larger padding */
     border: 1px solid #ced4da;
-    border-radius: 4px;
+    border-radius: 6px; /* Slightly larger radius */
     font-size: 16px;
     color: #2c3e50;
-    transition: border-color 0.3s ease;
-  }
-  
-  .info-row input:focus,
-  .info-row select:focus {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth focus transition */
+}
+
+/* Focus styles */
+.info-row input:focus,
+.info-row select:focus {
     border-color: #3498db;
     outline: none;
-  }
-  
-  /* Conteneur pour les boutons */
-  .button-container {
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Subtle glow effect */
+}
+
+/* Container for buttons */
+.button-container {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
     margin-top: 24px;
     padding-top: 16px;
     border-top: 1px solid #e0e0e0;
-  }
-  
-  /* Style des boutons */
-  button[mat-button] {
-    padding: 8px 16px;
-    border-radius: 4px;
+}
+
+/* Button styles */
+button[mat-button] {
+    padding: 10px 16px; /* Increased padding for a better click area */
+    border-radius: 6px;
     font-weight: 500;
-    transition: all 0.3s ease;
-  }
-  
-  /* Bouton Modifier */
-  button[mat-button]:not(.save-button) {
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Button hover effects */
+}
+
+/* Edit button */
+button[mat-button]:not(.save-button) {
     background-color: #f5f5f5;
     color: #2c3e50;
-  }
-  
-  button[mat-button]:not(.save-button):hover {
+}
+
+/* Edit button hover effect */
+button[mat-button]:not(.save-button):hover {
     background-color: #e0e0e0;
-  }
-  
-  /* Bouton Sauvegarder */
-  .save-button {
+    transform: translateY(-1px); /* Slight lift effect */
+}
+
+/* Save button */
+.save-button {
     background-color: #3498db !important;
     color: white !important;
-  }
-  
-  .save-button:hover {
+}
+
+/* Save button hover effect */
+.save-button:hover {
     background-color: #2980b9 !important;
-  }
-  
-  /* Responsive design */
-  @media (max-width: 600px) {
+    transform: translateY(-1px);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
     .medical-details {
-      padding: 16px;
+        padding: 16px;
     }
-  
+
     .info-row {
-      flex-direction: column;
-      align-items: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
     }
-  
+
     .info-row strong {
-      margin-bottom: 4px;
+        margin-bottom: 4px;
     }
-    
+
     .info-row input,
     .info-row select {
-      width: 100%;
+        width: 100%;
     }
-  }
+}
